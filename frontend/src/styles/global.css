@@ -1,0 +1,33 @@
+::selection {
+  background: rgb(178, 167, 246);
+}
+
+.loader {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.triangle-left {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 25px 215px 13.5px;
+  border-color: transparent transparent #ffffff transparent;
+  transform: rotate(53deg);
+  position: absolute;
+}
+
+.triangle-right {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 25px 225px 13.5px;
+  border-color: transparent transparent #ffffff transparent;
+  transform: rotate(-40deg);
+  position: absolute;
+}
