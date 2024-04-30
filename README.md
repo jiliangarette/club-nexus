@@ -18,10 +18,10 @@ laracult:
 	#php artisan breeze:install
 		>react
 		>dark
-		>pest
-
-
-##Other Third party libs:
+		>
+  
+ ##Other Third party libs:
+ 
      #Headless UI
      #Daisy UI
      #Emoji picker
