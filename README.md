@@ -21,9 +21,9 @@ laracult:
 		>pest
 
 
-##oTHER THiRd ParTy:
- -Headless UI
- -Daisy UI
- -Emoji picker
- -React markdown
- Hero icons
+##Other Third party libs:
+     #Headless UI
+     #Daisy UI
+     #Emoji picker
+     #React markdown
+     #Hero icons
