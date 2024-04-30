@@ -21,7 +21,7 @@ laracult:
 		>pest
 
 
-##oTHER THiRd ParTy
+##oTHER THiRd ParTy:
  -Headless UI
  -Daisy UI
  -Emoji picker
