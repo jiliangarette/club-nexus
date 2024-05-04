@@ -1,10 +1,21 @@
 import ChatLayout from "@/Layouts/ChatLayout";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
-export default function Home({ auth }) {
+function Home({ auth }) {
     return (
-        <ChatLayout>
+        <>
             {/* <Head title="Dashboard" /> */}
-Messadjes
-        </ChatLayout>
+            messages
+        </>
     );
 }
+
+Home.layout = (page) => {
+    return (
+        <AuthenticatedLayout user={page.props.auth.user}>
+            <ChatLayout children={page} />
+        </AuthenticatedLayout>
+    );
+};
+
+export default Home;
