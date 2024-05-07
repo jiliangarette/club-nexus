@@ -50,4 +50,10 @@ class User extends Authenticatable
     public function groups(){
         return $this->belongsToMany(Group::class, 'group_users');
     }
+    public static function getUsersExceotUser(User $exceptUser)
+    {
+        //stoped here: timestamp 1:55:51
+        //next complicated sql query
+    }
+    
 }
