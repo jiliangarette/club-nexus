@@ -5,8 +5,7 @@ BROADCASTING:
 -   Is a real-time communication
 -   Is a method whenever our client is connected to the server through the socket server and receives that real-time updates regarding certain things.
 
-
-#   Laravel reverb: is a separate server using different port. that handles the response?. idk but sounds like it. It then connect to a user using web suck it.
+Laravel reverb: is a separate server using different port. that handles the response?. idk but sounds like it. It then connect to a user using web suck it.
 
 example:
 user 1 want to communicate with the user 2.
