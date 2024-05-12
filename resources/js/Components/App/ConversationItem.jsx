@@ -48,7 +48,7 @@ const ConversationItem = ({
                 {conversation.is_user && (
                     <UserAvatar user={conversation} online={online} />
                 )}
-                {conversation.is_user && <GroupAvatar />}
+                {conversation.is_group && <GroupAvatar />}
                 <div
                     className={
                         `flex-1 text-xs max-w-full overflow-hidden` +

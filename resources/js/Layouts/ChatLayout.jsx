@@ -117,13 +117,13 @@ const ChatLayout = ({ children }) => {
                     <div className="flex-1 overflow-auto">
                         {sortedConversations &&
                             sortedConversations.map((conversation) => (
-                                //I added conversationItem component, located on layout folder
                                 <ConversationItem
                                     key={`${
                                         conversation.is_group
                                             ? "group_"
                                             : "user_"
                                     }${conversation.id}`}
+                                    conversation={conversation}
                                     online={!!isUserOnline(conversation.id)}
                                     selectedConversation={selectedConversation}
                                 />

@@ -1,4 +1,4 @@
-import { UserIcon } from "@heroicons/react/24/solid";
+import { UsersIcon } from "@heroicons/react/24/solid";
 
 const GroupAvatar = ({}) => {
     return (
@@ -6,7 +6,7 @@ const GroupAvatar = ({}) => {
             <div className={`placeholder avatar`}>
                 <div className={`bg-gray-400 text-gray-800 rounded-full w-8`}>
                     <span className="text-xl">
-                        <UserIcon className="w-4" />
+                        <UsersIcon className="w-4" />
                     </span>
                 </div>
             </div>
