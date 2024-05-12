@@ -2,19 +2,28 @@ import { usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import TextInput from "@/Components/TextInput";
-import ConversationItem from "./ConversationItem";
+import ConversationItem from "@/Components/App/ConversationItem";
 
 const ChatLayout = ({ children }) => {
     const page = usePage();
     const conversations = page.props.conversations;
-    const selectedConversations = page.props.selectedConversations;
+    const selectedConversation = page.props.selectedConversation;
     const [onlineUsers, setOnlineUsers] = useState({});
     const [localConversations, setLocalConversations] = useState([]);
     const [sortedConversations, setSortedConversations] = useState([]);
     const isUserOnline = (userId) => onlineUsers[userId];
 
     console.log("conversations", conversations);
-    console.log("selectedConversations", selectedConversations);
+    console.log("selectedConversation", selectedConversation);
+
+    const onSearch = (ev) => {
+        const search = ev.target.value.toLowerCase();
+        setLocalConversations(
+            conversations.filter((conversation) => {
+                return conversation.name.toLowerCase().includes(search);
+            })
+        );
+    };
 
     useEffect(() => {
         setSortedConversations(
@@ -84,7 +93,7 @@ const ChatLayout = ({ children }) => {
             <div className="flex-1 w-full flex overflow-hidden">
                 <div
                     className={`transition-all w-fill sm:w-[220px] md:w-[300px] bg-slate-800 flex flex-col overflow-hidden
-                    ${selectedConversations ? "-ml-[100%] sm:ml-0" : ""}`}
+                    ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
                 >
                     <div className="flex items-center justify-between py-2 px-3 text-xl font-medium">
                         My Conversations
@@ -99,20 +108,24 @@ const ChatLayout = ({ children }) => {
                     </div>
                     <div className="p-3">
                         <TextInput
-                            // onKeyUp={onSearch}
+                            onKeyUp={onSearch}
                             placeholder="Filter users and groups"
                             className="w-full p-2"
+                            //added padding for inputs
                         />
                     </div>
                     <div className="flex-1 overflow-auto">
                         {sortedConversations &&
                             sortedConversations.map((conversation) => (
+                                //I added conversationItem component, located on layout folder
                                 <ConversationItem
                                     key={`${
                                         conversation.is_group
                                             ? "group_"
                                             : "user_"
                                     }${conversation.id}`}
+                                    online={!!isUserOnline(conversation.id)}
+                                    selectedConversation={selectedConversation}
                                 />
                             ))}
                     </div>
