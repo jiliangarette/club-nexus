@@ -23,7 +23,7 @@ class SocketMessage implements ShouldBroadcast
         //
     }
 
-    public function BroadcastWith(): array
+    public function broadcastWith(): array
     {
         return [
             'message' => new MessageResource($this->message),
