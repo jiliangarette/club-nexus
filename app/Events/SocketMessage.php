@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Http\Resources\MessageResource;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Message;
-class SocketMessage
+class SocketMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,6 +23,13 @@ class SocketMessage
         //
     }
 
+    public function BroadcastWith(): array
+    {
+        return [
+            'message' => new MessageResource($this->message),
+        ];
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -29,6 +37,15 @@ class SocketMessage
      */
     public function broadcastOn(): array
     {
+        $m = $this->message;
         $channels = [];
+
+        if($m->group_id) {
+            $channels[] = new PrivateChannel('message.group.' . $m->group_id);
+        } else {
+            new PrivateChannel('message.user.' . collect([$m->sender_id, $m->receiver_id])->sort()->implode('-'));
+        }
+
+        return $channels;
     }
-}//test
+}
