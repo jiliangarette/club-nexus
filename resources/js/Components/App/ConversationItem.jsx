@@ -2,6 +2,7 @@ import { Link, usePage } from "@inertiajs/react";
 import GroupAvatar from "./GroupAvatar";
 import UserAvatar from "./UserAvatar";
 import UserOptionsDropdown from "./UserOptionsDropdown";
+import { route } from "ziggy-js";
 
 const ConversationItem = ({
     conversation,
@@ -46,6 +47,7 @@ const ConversationItem = ({
                 }
             >
                 {conversation.is_user && (
+                    
                     <UserAvatar user={conversation} online={online} />
                 )}
                 {conversation.is_group && <GroupAvatar />}

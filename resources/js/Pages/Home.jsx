@@ -1,14 +1,16 @@
 import ChatLayout from "@/Layouts/ChatLayout";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
+import MessageItem from "@/Components/App/MessageItem";
+import ConversationHeader from "@/Components/App/ConversationHeader";
 
-function Home({ messages }) {
+function Home({ selectedConversation = null, messages = null }) {
+    console.log("messages", messages);
     const [localMessages, setLocalMessages] = useState([]);
-
+    const messagesCtrRef = useRef(null);
     useEffect(() => {
-        setLocalMessages(messages);
+        setLocalMessages(messages ? messages.data.reverse() : []);
     }, [messages]);
 
     return (
@@ -20,6 +22,36 @@ function Home({ messages }) {
                     </div>
                     <ChatBubbleLeftRightIcon className="w-32 h-32 inline-block" />
                 </div>
+            )}
+            {messages && (
+                <>
+                    <ConversationHeader
+                        selectedConversation={selectedConversation}
+                    />
+                    <div
+                        ref={messagesCtrRef}
+                        className="flex-1 overflow-y-auto p-5"
+                    >
+                        {localMessages.length === 0 && (
+                            <div className="flex justify-center items-center h-full">
+                                <div className="text-lg text-slate-200">
+                                    No messages found
+                                </div>
+                            </div>
+                        )}
+                        {localMessages.length > 0 && (
+                            <div className="flex-1 flex flex-col">
+                                {localMessages.map((message) => (
+                                    <MessageItem
+                                        key={message.id}
+                                        message={message}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    {/* <MessageInput conversation={selectedConversation} /> */}
+                </>
             )}
         </>
     );
