@@ -6,9 +6,14 @@ import MessageItem from "@/Components/App/MessageItem";
 import ConversationHeader from "@/Components/App/ConversationHeader";
 
 function Home({ selectedConversation = null, messages = null }) {
-    console.log("messages", messages);
     const [localMessages, setLocalMessages] = useState([]);
     const messagesCtrRef = useRef(null);
+    useEffect(() => {
+        setTimeout(() => {
+            messagesCtrRef.current.scrollTop =
+                messagesCtrRef.current.scrollHeight;
+        }, 10);
+    }, [selectedConversation]);
     useEffect(() => {
         setLocalMessages(messages ? messages.data.reverse() : []);
     }, [messages]);
