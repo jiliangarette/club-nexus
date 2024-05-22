@@ -56,6 +56,7 @@ const MessageInput = ({ conversation = null }) => {
             <div className="order-3 xs:order-3 p-2 flex">
                 <button className="p-1 text-gray-400 hover:text-gray-300">
                     <FaceSmileIcon className="w-6 h-6" />
+                    hello world
                 </button>
             </div>
         </div>
