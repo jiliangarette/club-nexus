@@ -17,6 +17,13 @@ export default {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
         },
+        screens: {
+            xs: "420px",
+            sm: "680px",
+            md: "768px",
+            lg: "1024pz",
+            xl: "1280px",
+        },
     },
 
     plugins: [forms, require("daisyui")],

@@ -58,6 +58,7 @@ const ChatLayout = ({ children }) => {
                 const onlineUserObj = Object.fromEntries(
                     users.map((user) => [user.id, user])
                 );
+                0;
 
                 setOnlineUsers((prevOnlineUsers) => {
                     return { ...prevOnlineUsers, ...onlineUserObj };
@@ -89,7 +90,7 @@ const ChatLayout = ({ children }) => {
         <>
             <div className="flex-1 w-full flex overflow-hidden">
                 <div
-                    className={`transition-all w-fill sm:w-[220px] md:w-[300px] bg-slate-800 flex flex-col overflow-hidden
+                    className={`transition-all w-full sm:w-[220px] md:w-[300px] bg-slate-800 flex flex-col overflow-hidden
                     ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
                 >
                     {/* Take note of this thing '-ml-[100%]' this correlates with the side bar problem */}

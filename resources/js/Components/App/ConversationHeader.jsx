@@ -10,7 +10,8 @@ const ConversationHeader = ({ selectedConversation }) => {
                 <div className="p-3 flex justify-between items-center border-b border-slate-700">
                     <div className="flex items-center gap-3">
                         <Link
-                            href={(route = "dashboard")}
+                            href={(route = "/")}
+                            //change the dashboard route into slash which means main route
                             className="inline-block sm:hidden"
                         >
                             <ArrowLeftIcon className="w-6" />
