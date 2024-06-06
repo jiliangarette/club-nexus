@@ -29,4 +29,4 @@ class StoreMessageRequest extends FormRequest
         'attachments.*' => 'file|max:1024000'
         ];
     }
-}//test
+}
