@@ -75,5 +75,5 @@ Home.layout = (page) => {
         </AuthenticatedLayout>
     );
 };
-
+//.
 export default Home;
