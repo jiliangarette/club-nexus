@@ -5,6 +5,7 @@ import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
 import { route } from "ziggy-js";
+import { useEffect } from "react";
 
 export default function Authenticated({ header, children }) {
     const page = usePage();
@@ -12,6 +13,18 @@ export default function Authenticated({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    useEffect(() => {
+        conversations.forEach((conversation) => {
+            let channel = `message.group.${conversation.id}`;
+
+            if (conversation.is_user) {
+                channel = `message.group.${[
+                    parseInt(user.id),
+                    parseInt(conversation.id),
+                ]}`;
+            }
+        });
+    }, [conversations]);
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 h-screen flex flex-col">
             <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
