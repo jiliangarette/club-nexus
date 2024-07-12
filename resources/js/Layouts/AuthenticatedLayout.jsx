@@ -9,6 +9,7 @@ import { useEffect } from "react";
 
 export default function Authenticated({ header, children }) {
     const page = usePage();
+    const conversations = page.props.conversations; //take note of this, gonnat sleep first, please fix conversations. goodness gracious
     const user = page.props.auth.user;
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
@@ -18,11 +19,27 @@ export default function Authenticated({ header, children }) {
             let channel = `message.group.${conversation.id}`;
 
             if (conversation.is_user) {
-                channel = `message.group.${[
+                channel = `message.user.${[
                     parseInt(user.id),
                     parseInt(conversation.id),
-                ]}`;
+                ]
+                    .sort((a, b) => a - b)
+                    .join("-")}`;
             }
+
+            Echo.private(channel)
+                .error((error) => {
+                    console.error(error);
+                })
+                .listen("SocketMessage", (e) => {
+                    console.log("SocketMessage", e);
+                    const message = e.message;
+
+                    emit("message.created", message);
+                    if (message.sender_id === user.id) {
+                        return;
+                    }
+                });
         });
     }, [conversations]);
     return (
@@ -175,7 +192,6 @@ export default function Authenticated({ header, children }) {
                     </div>
                 </div>
             </nav>
-            //header
             {header && (
                 <header className="bg-white dark:bg-gray-800 shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
