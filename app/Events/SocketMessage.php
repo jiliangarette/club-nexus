@@ -8,10 +8,12 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Message;
-class SocketMessage implements ShouldBroadcast
+
+class SocketMessage implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -40,10 +42,10 @@ class SocketMessage implements ShouldBroadcast
         $m = $this->message;
         $channels = [];
 
-        if($m->group_id) {
+        if ($m->group_id) {
             $channels[] = new PrivateChannel('message.group.' . $m->group_id);
         } else {
-            new PrivateChannel('message.user.' . collect([$m->sender_id, $m->receiver_id])->sort()->implode('-'));
+            $channels[] =  new PrivateChannel('message.user.' . collect([$m->sender_id, $m->receiver_id])->sort()->implode('-'));
         }
 
         return $channels;
