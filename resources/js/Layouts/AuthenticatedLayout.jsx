@@ -6,14 +6,16 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
 import { route } from "ziggy-js";
 import { useEffect } from "react";
+import { useEventBus } from "@/EventBus";
 
 export default function Authenticated({ header, children }) {
     const page = usePage();
 
     const user = page.props.auth.user;
-    const conversations = page.props.conversations; //take note of this, gonnat sleep first, please fix conversations. goodness gracious
+    const conversations = page.props.conversations;
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    const { emit } = useEventBus();
 
     useEffect(() => {
         conversations.forEach((conversation) => {
@@ -36,21 +38,21 @@ export default function Authenticated({ header, children }) {
                     console.log("SocketMessage", e);
                     const message = e.message;
 
-                    // emit("message.created", message);
+                    emit("message.created", message);
                     if (message.sender_id === user.id) {
                         return;
                     }
-                    // emit("newMessageNotification", {
-                    //     user: message.sender,
-                    //     group_id: message.group_id,
-                    //     message:
-                    //         message.message ||
-                    //         `Shared ${
-                    //             message.attachments.length === 1
-                    //                 ? "an attachment"
-                    //                 : message.attachments.length +       "attachments"
-                    //         }`,
-                    // });
+                    emit("newMessageNotification", {
+                        user: message.sender,
+                        group_id: message.group_id,
+                        message:
+                            message.message ||
+                            `Shared ${
+                                message.attachments.length === 1
+                                    ? "an attachment"
+                                    : message.attachments.length + "attachments"
+                            }`,
+                    });
                 });
         });
 
