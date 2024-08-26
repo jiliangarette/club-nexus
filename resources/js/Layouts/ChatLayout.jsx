@@ -88,9 +88,9 @@ const ChatLayout = ({ children }) => {
     }, []);
     return (
         <>
-            <div className="flex-1 w-full flex overflow-hidden">
+            <div className="flex-1 w-full flex overflow-hidden ">
                 <div
-                    className={`transition-all w-full sm:w-[220px] md:w-[300px] bg-slate-800 flex flex-col overflow-hidden
+                    className={`transition-all w-full sm:w-[220px] md:w-[300px] dark:bg-slate-800  flex flex-col overflow-hidden border border-r-gray-700
                     ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
                 >
                     {/* Take note of this thing '-ml-[100%]' this correlates with the side bar problem */}
@@ -100,7 +100,7 @@ const ChatLayout = ({ children }) => {
                             className="tooltip tooltip-left"
                             data-tip="Create new Group"
                         >
-                            <button className="text-gray-400 hover:text-gray-200">
+                            <button className="dark:text-gray-400  dark:hover:text-gray-200">
                                 <PencilSquareIcon className="w-4 h-4 inline-block ml-2" />
                             </button>
                         </div>
@@ -108,12 +108,13 @@ const ChatLayout = ({ children }) => {
                     <div className="p-3">
                         <TextInput
                             onKeyUp={onSearch}
-                            placeholder="Filter users and groups"
+                            placeholder="Filter users and clubs"
+                            // q
                             className="w-full p-2"
                             //added padding for inputs
                         />
                     </div>
-                    <div className="flex-1 overflow-auto">
+                    <div className="flex-1 overflow-auto ">
                         {sortedConversations &&
                             sortedConversations.map((conversation) => (
                                 <ConversationItem

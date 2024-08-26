@@ -134,7 +134,7 @@ function Home({ selectedConversation = null, messages = null }) {
                     >
                         {localMessages.length === 0 && (
                             <div className="flex justify-center items-center h-full">
-                                <div className="text-lg text-slate-200">
+                                <div className="text-lg dark:text-slate-200">
                                     No messages found
                                 </div>
                             </div>
