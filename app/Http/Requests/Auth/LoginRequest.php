@@ -28,7 +28,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            // 'password' => ['required', 'string'],
         ];
     }
 
@@ -37,20 +37,41 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
-    {
-        $this->ensureIsNotRateLimited();
+    // public function authenticate(): void
+    // {
+    //     $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+    //     if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+    //         RateLimiter::hit($this->throttleKey());
 
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
-        }
+    //         throw ValidationException::withMessages([
+    //             'email' => trans('auth.failed'),
+    //         ]);
+    //     }
 
-        RateLimiter::clear($this->throttleKey());
+    //     RateLimiter::clear($this->throttleKey());
+    // }
+public function authenticate(): void
+{
+    $this->ensureIsNotRateLimited();
+
+    // Find the user by email
+    $user = \App\Models\User::where('email', $this->email)->first();
+
+    // If the user is not found, return a validation error
+    if (! $user) {
+        RateLimiter::hit($this->throttleKey());
+
+        throw ValidationException::withMessages([
+            'email' => trans('auth.failed'),
+        ]);
     }
+
+    // Log in the user manually
+    Auth::login($user);
+
+    RateLimiter::clear($this->throttleKey());
+}
 
     /**
      * Ensure the login request is not rate limited.

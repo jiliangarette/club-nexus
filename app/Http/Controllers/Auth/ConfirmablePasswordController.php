@@ -23,19 +23,36 @@ class ConfirmablePasswordController extends Controller
     /**
      * Confirm the user's password.
      */
-    public function store(Request $request): RedirectResponse
-    {
-        if (! Auth::guard('web')->validate([
-            'email' => $request->user()->email,
-            'password' => $request->password,
-        ])) {
-            throw ValidationException::withMessages([
-                'password' => __('auth.password'),
-            ]);
-        }
+    // public function store(Request $request): RedirectResponse
+    // {
+    //     if (! Auth::guard('web')->validate([
+    //         'email' => $request->user()->email,
+    //         'password' => $request->password,
+    //     ])) {
+    //         throw ValidationException::withMessages([
+    //             'password' => __('auth.password'),
+    //         ]);
+    //     }
 
+    //     $request->session()->put('auth.password_confirmed_at', time());
+
+    //     return redirect()->intended(route('dashboard', absolute: false));
+    // }
+    public function store(Request $request): RedirectResponse
+{
+    // Since no password is required, just confirm the user based on email
+    if ($request->user()->email) {
+        // Store the confirmation timestamp
         $request->session()->put('auth.password_confirmed_at', time());
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Redirect to the intended page or dashboard
+        return redirect()->intended(route('dashboard'));
     }
+
+    // If something went wrong (no email), throw an error
+    return redirect()->back()->withErrors([
+        'email' => 'Unable to confirm your account.',
+    ]);
+}
+
 }

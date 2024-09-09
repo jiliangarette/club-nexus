@@ -46,9 +46,9 @@ const ConversationItem = ({
                         : "pr-4")
                 }
             >
-                {conversation.is_user && (
+                {/* {conversation.is_user && (
                     <UserAvatar user={conversation} online={online} />
-                )}
+                )} */}
                 {conversation.is_group && <GroupAvatar />}
                 <div
                     className={
@@ -60,7 +60,7 @@ const ConversationItem = ({
                 >
                     <div className="flex gap-1 justify-between items-center">
                         <h3 className="text-sm font-semibold overflow-hidden text-nowrap text-ellipsis">
-                            {conversation.name}
+                            {!conversation.is_user ? conversation.name : ""}
                         </h3>
                         {conversation.last_message_date && (
                             <span className="text-nowrap">
@@ -74,9 +74,9 @@ const ConversationItem = ({
                         </span>
                     )}
                 </div>
-                {currentUser.is_admin && conversation.is_user && (
+                {/* {currentUser.is_admin && conversation.is_user && (
                     <UserOptionsDropdown conversation={conversation} />
-                )}
+                )} */}
             </Link>
         </>
     );
