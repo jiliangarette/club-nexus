@@ -3,6 +3,7 @@ import GroupAvatar from "./GroupAvatar";
 import UserAvatar from "./UserAvatar";
 import UserOptionsDropdown from "./UserOptionsDropdown";
 import { route } from "ziggy-js";
+import { formatMessageDateShort } from "@/helper";
 
 const ConversationItem = ({
     conversation,
@@ -47,7 +48,6 @@ const ConversationItem = ({
                 }
             >
                 {conversation.is_user && (
-                    
                     <UserAvatar user={conversation} online={online} />
                 )}
                 {conversation.is_group && <GroupAvatar />}
@@ -65,7 +65,9 @@ const ConversationItem = ({
                         </h3>
                         {conversation.last_message_date && (
                             <span className="text-nowrap">
-                                {conversation.last_message_date}
+                                {formatMessageDateShort(
+                                    conversation.last_message_date
+                                )}
                             </span>
                         )}
                     </div>

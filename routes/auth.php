@@ -14,7 +14,7 @@ use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-         Route::get('/',[LandingPageController::class, 'landingPage'])->name('landingPage');
+        //  Route::get('/',[LandingPageController::class, 'landingPage'])->name('landingPage');
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
