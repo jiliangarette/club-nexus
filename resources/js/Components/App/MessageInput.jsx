@@ -10,6 +10,7 @@ import NewMessageInput from "./NewMessageInput";
 import { route } from "ziggy-js";
 import EmojiPicker from "emoji-picker-react";
 import { Popover } from "@headlessui/react";
+import axios from "axios";
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
@@ -54,6 +55,23 @@ const MessageInput = ({ conversation = null }) => {
             .catch((error) => {
                 setMessageSending(false);
             });
+    };
+    const onLikeClick = () => {
+        if (messageSending) {
+            return;
+        }
+
+        const data = {
+            message: "👍🏻",
+        };
+
+        if (conversation.is_user) {
+            data["receiver_id"] = conversation.id;
+        } else if (conversation.is_group) {
+            data["group_id"] = conversation.id;
+        }
+
+        axios.post(route("message.store"), data);
     };
 
     return (
@@ -118,7 +136,10 @@ const MessageInput = ({ conversation = null }) => {
                     </Popover.Panel>
                 </Popover>
 
-                <button className="p-1 text-gray-400 hover:text-gray-300">
+                <button
+                    onClick={onLikeClick}
+                    className="p-1 text-gray-400 hover:text-gray-300"
+                >
                     <HandThumbUpIcon className="w-6 h-6" />
                 </button>
             </div>
