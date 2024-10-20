@@ -120,13 +120,6 @@
     margin-left: 20px;
 }
 
-.chat-message-content {
-    font-size: 14px;
-    font-family: "Arial", sans-serif;
-    padding: 10px;
-    border-radius: 8px;
-}
-
 .chat-message-content p {
-    margin-bottom: 12px;
+    margin-bottom: 2px;
 }
