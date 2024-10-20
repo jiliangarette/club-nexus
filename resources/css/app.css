@@ -46,18 +46,21 @@
 }
 
 .chat-message-content pre {
-    background-color: #1e1e2e;
+    background-color: rgb(0, 0, 0, 0.1);
     padding: 12px;
     border-radius: 10px;
     font-family: "Courier New", monospace;
     overflow: auto;
+    font-size: 90%;
 }
 
 .chat-message-content code {
+    background-color: rgb(0, 0, 0, 0.1);
     color: #a1266e;
-    padding: 3px 6px;
-    border-radius: 3px;
+    padding: 3px 8px;
+    border-radius: 5px;
     font-family: "Courier New", monospace;
+    font-weight: 600;
 }
 
 .chat-message-content hr {
@@ -65,7 +68,9 @@
     border-top: 1px solid #909090;
     margin: 12px 0;
 }
-
+.chat-message-content pre code {
+    background-color: transparent;
+}
 .chat-message-content ul,
 .chat-message-content ol {
     padding-left: 20px;
