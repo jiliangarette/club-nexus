@@ -21,7 +21,7 @@ const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
     const [inputErrorMessage, setInputErrorMessage] = useState("");
     const [messageSending, setMessageSending] = useState(false);
-    const [chosenFiles, setChosentFiles] = useState([]);
+    const [chosenFiles, setChosenFiles] = useState([]);
     const [uploadProgress, setUploadProgress] = useState(0);
 
     const onFileChange = (ev) => {
@@ -35,7 +35,7 @@ const MessageInput = ({ conversation = null }) => {
         });
         ev.target.value = null;
 
-        setChosentFiles((prevFiles) => {
+        setChosenFiles((prevFiles) => {
             return [...prevFiles, ...updatedFiles];
         });
     };
@@ -80,12 +80,12 @@ const MessageInput = ({ conversation = null }) => {
             .then((response) => {
                 setNewMessage("");
                 setMessageSending(false);
-                setUploadProgress(8);
-                setChosentFiles([]);
+                setUploadProgress(0);
+                setChosenFiles([]);
             })
             .catch((error) => {
                 setMessageSending(false);
-                setChosentFiles([]);
+                setChosenFiles([]);
                 const message = error?.response?.data?.message;
                 setInputErrorMessage(
                     message || "An error occured while sending message"
@@ -111,7 +111,7 @@ const MessageInput = ({ conversation = null }) => {
     };
 
     const recordedAudioReady = (file, url) => {
-        setChosentFiles((prevFiles) => [...prevFiles, { file, url }]);
+        setChosenFiles((prevFiles) => [...prevFiles, { file, url }]);
     };
     return (
         <div className="flex flex-wrap items-start border-t border-slate-700 py-3">
@@ -195,7 +195,7 @@ const MessageInput = ({ conversation = null }) => {
 
                             <button
                                 onClick={() =>
-                                    setChosentFiles(
+                                    setChosenFiles(
                                         chosenFiles.filter(
                                             (f) =>
                                                 f.file.name !== file.file.name
