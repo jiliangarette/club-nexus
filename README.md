@@ -1,67 +1,132 @@
-LARACULT-REACT NOTES
+# Running Club Nexus Locally: Step-by-Step Guide
 
-BROADCASTING:
+## 📋 Prerequisites
 
--   Is a real-time communication
--   Is a method whenever our client is connected to the server through the socket server and receives that real-time updates regarding certain things.
+Before starting, ensure you have the following software installed:
 
-Laravel reverb: is a separate server using different port. that handles the response?. idk but sounds like it. It then connect to a user using web suck it.
+1. **Visual Studio Code**
 
-example:
-user 1 want to communicate with the user 2.
+      - **Download:** [Visual Studio Code](https://code.visualstudio.com/)
 
-so by option it can be done by a server that connects to database, a user post that message and get the messege from the database to be sent to user 2.
-But this is not realtime it needs state to be triggered before it can be display.
+2. **Node.js**
 
-Eeverb can make it better and can be simplified this by using the Laravel reverb heres what i think it do:
-user 1 sends the message to the server and puts it in the database and then while sending the message to the database the Laravel server also tells the Laravel reverb which is a separate server/port and takes this messege and sent it to user 2 which allows the communication in real time.
+      - **Download:** [Node.js](https://nodejs.org/)
+      - **Check Installation:** Open your terminal and run:
+           ```bash
+           node -v
+           ```
 
---bash cmd
-#laravel new NAME-OF-PROJECT
+3. **XAMPP**
 
-    --database configuration
-    #change the sqlite to 'mysql' dependi sa db imo gamit lods
-    #change the `DB NAME` in {.env} to name of the repo
-    #php artisan migrate
+      - **Download:** [XAMPP](https://www.apachefriends.org/index.html)
+      - **Install** and start Apache and MySQL services.
 
-    --to run this shit
+4. **Composer**
+      - **Download:** [Composer](https://getcomposer.org/download/)
+      - **Check Installation:** Open your terminal and run:
+           ```bash
+           composer --version
+           ```
 
-    --extension dependency
-    #composer requires Laravel:breeze --dev
-    #php artisan breeze:install
-    	>react
-    	>dark
-    	>pest
+---
 
-##Other Third party libs:
+## ⚠️ Additional Notes
 
-    #npm install @headlessui/react @heroicons/react daisyui emoji-picker-react react-markdown uuid
+- Ensure that you have all the required software installed as listed above.
+- If you encounter any issues, check the versions of Node.js and PHP using these commands:
+     ```bash
+     node -v
+     php -v
+     ```
 
-Broadcasting:
+---
 
-    #php artisan install:broadcasting
-    	>yes
-    	>yes
+## 🔧 Setup Instructions
 
-How does one make a model:
+### 1. Clone the Repository
 
-    #php artisan make:model Group -m
-    #php artisan make:model User -m
+Open your terminal and run the following command to clone the project repository:
 
-    	--this means that make a database table User and -m is migrating it.
+```bash
+git clone https://github.com/jiliangarette/club-nexus.git
+```
 
-##Ports commands
+### 2. Navigate to the Project Directory
 
-Run Laravel reverb:
+Change your directory to the cloned project folder:
 
-    #php artisan reverb:start --debug
+```bash
+cd club-nexus
+```
 
-Run Laravel:
+### 3. Set Up Environment Variables
 
-    #php artisan serve
+Copy the example environment configuration to create your `.env` file:
 
-Run React:
+```bash
+cp .env.example .env
+```
 
-    #npm run dev
+### 4. Generate Application Key
 
-test
+Run the following command to generate a unique application key for your Laravel app:
+
+```bash
+php artisan key:generate
+```
+
+### 5. Install Node.js Dependencies
+
+Install all necessary Node.js packages required for the frontend:
+
+```bash
+npm install
+```
+
+### 6. Install PHP Dependencies
+
+Install all required PHP packages using Composer:
+
+```bash
+composer install
+```
+
+---
+
+## 🚀 Running the Project Locally
+
+### 1. Start the Laravel Development Server
+
+In your terminal, run the command below to start the Laravel server:
+
+```bash
+php artisan serve
+```
+
+### 2. Start the Laravel Reverb WebSocket Server
+
+Open a new terminal window (or tab) and run the following command to start the WebSocket server:
+
+```bash
+php artisan reverb:start
+```
+
+### 3. Compile Frontend Assets
+
+In another terminal window, compile your frontend assets using the following command:
+
+```bash
+npm run dev
+```
+
+---
+
+## 🌐 Accessing the Application
+
+Open your web browser and navigate to:
+
+```
+http://127.0.0.1:8000/
+```
+
+---
