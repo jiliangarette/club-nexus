@@ -9,6 +9,7 @@ import { useForm, usePage } from "@inertiajs/react";
 import PrimaryButton from "../PrimaryButton";
 import { useEventBus } from "@/EventBus";
 import { useEffect, useState } from "react";
+import { route } from "ziggy-js";
 
 export default function GroupModal({ show = false, onClose = () => {} }) {
   const page = usePage();
@@ -114,7 +115,7 @@ export default function GroupModal({ show = false, onClose = () => {} }) {
         </div>
         <div className="mt-6 flex justify-end">
           <SecondaryButton onClick={closeModal}>cancel</SecondaryButton>
-          <PrimaryButton className="ms-3" disabled={processing}>
+          <PrimaryButton className="ms-3" disabled={processing} type="submit">
             {group.id ? "Update" : "Create"}
           </PrimaryButton>
         </div>
