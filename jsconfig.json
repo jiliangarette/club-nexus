@@ -1,5 +1,3 @@
-// Configures compiler options for JavaScript in a Laravel project, allowing path aliases for easier imports.
-
 {
     "compilerOptions": {
         "baseUrl": ".",
