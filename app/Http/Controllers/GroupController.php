@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Jobs\DeleteGroupJob;
 
 class GroupController extends Controller
 {
@@ -32,10 +33,12 @@ class GroupController extends Controller
 
     public function destroy(Group $group)
     {
-      if($group->owner_id !== auth()->id){
+        if ($group->owner_id !== auth()->user()->id) {
         abort(403);
-      }
+    }
 
+
+      DeleteGroupJob::dispatch($group)->delay(now()->addSeconds(1));
 
       return response()->json(['message'=> 'Group delete was scheduled and will be deleted soon']);
 

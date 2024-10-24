@@ -9,6 +9,7 @@ import GroupAvatar from "./GroupAvatar";
 import GroupDescriptionPopover from "./GroupDescriptionPopover";
 import GroupUsersPopover from "./GroupUsersPopover";
 import { useEventBus } from "@/EventBus";
+import { route } from "ziggy-js";
 
 const ConversationHeader = ({ selectedConversation }) => {
   const authUser = usePage().props.auth.user;
@@ -22,8 +23,8 @@ const ConversationHeader = ({ selectedConversation }) => {
 
     axios
       .delete(route("group.destroy", selectedConversation.id))
-      .then(() => {
-        console.log(res);
+      .then((res) => {
+        emit("toast.show", res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -35,7 +36,7 @@ const ConversationHeader = ({ selectedConversation }) => {
       {selectedConversation && (
         <div className="p-3 flex justify-between items-center border-b border-slate-700">
           <div className="flex items-center gap-3">
-            <Link href={(route = "/")} className="inline-block sm:hidden">
+            <Link href={route("dashboard")} className="inline-block sm:hidden">
               <ArrowLeftIcon className="w-6" />
             </Link>
             {selectedConversation.is_user && (

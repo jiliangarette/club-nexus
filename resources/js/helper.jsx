@@ -64,7 +64,7 @@ export const isYesterday = (date) => {
     );
 };
 
-// this gonna be use in to preview already sent files
+// This will be used to preview already sent files
 export const isImage = (attachment) => {
     let mime = attachment.mime || attachment.type;
     mime = mime.split("/");
