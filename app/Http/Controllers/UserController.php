@@ -15,7 +15,7 @@ class UserController extends Controller
             'email' => ['required','email' , 'unique:users,email' ],
             'is_admin' => 'boolean',
         ]);
- 
+
         // $rawPassword = Str::random(8);
         $rawPassword = '12345678';
         $data['password'] = bcrypt($rawPassword);
@@ -37,14 +37,14 @@ class UserController extends Controller
     public function blockUnblock(User $user){
       if($user->blocked_at){
         $user->blocked_at = null;
-        $message = 'Your account has been activated';
+        $message = 'User'. $user->name .' has been activated';
       } else {
         $user->blocked_at = now();
-        $message = 'Your account has been blocked';
+        $message = 'User'. $user->name .' has been blocked';
       }
 
       $user->save();
 
-      return response()->json([$message => $message]);
+      return response()->json(['message' => $message]);
     }
 }

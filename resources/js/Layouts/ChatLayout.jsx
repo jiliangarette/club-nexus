@@ -154,7 +154,6 @@ const ChatLayout = ({ children }) => {
           className={`transition-all w-full sm:w-[220px] md:w-[300px] bg-slate-800 flex flex-col overflow-hidden
                     ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
         >
-          {/* Take note of this thing '-ml-[100%]' this correlates with the side bar problem */}
           <div className="flex items-center justify-between py-2 px-3 text-xl font-medium">
             My Conversations
             <div className="tooltip tooltip-left" data-tip="Create new Group">
@@ -190,7 +189,7 @@ const ChatLayout = ({ children }) => {
         </div>
         <div className="flex-1 flex flex-col overflow-hidden">{children}</div>
       </div>
-              
+
       <GroupModal
         show={showGroupModal}
         onClose={() => setShowGroupModal(false)}

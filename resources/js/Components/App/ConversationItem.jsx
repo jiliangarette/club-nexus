@@ -32,8 +32,6 @@ const ConversationItem = ({
 
   return (
     <>
-      {/* {(conversation.is_group ||
-        (conversation.is_user && conversation.last_message)) && ( */}
       <Link
         href={
           conversation.is_group
@@ -53,14 +51,14 @@ const ConversationItem = ({
         {conversation.is_group && <GroupAvatar />}
         <div
           className={
-            `flex-1 text-xs max-w-full overflow-hidden` +
+            `flex-1 text-xs max-w-full overflow-hidden ` +
             (conversation.is_user && conversation.blocked_at
               ? "opacity-50"
               : "")
           }
         >
           <div className="flex gap-1 justify-between items-center">
-            <h3 className="text-sm font-semibold overflow-hidden text-nowrap text-ellipsis">
+            <h3 className="text-sm font-semibold  text-nowrap text-ellipsis">
               {conversation.name}
             </h3>
             {conversation.last_message_date && (
@@ -70,7 +68,7 @@ const ConversationItem = ({
             )}
           </div>
           {conversation.last_message && (
-            <span className="text-xs text-nowrap overflow-hidden text-ellipsis">
+            <span className="text-xs text-nowrap  text-ellipsis">
               {conversation.last_message}
             </span>
           )}
@@ -79,7 +77,6 @@ const ConversationItem = ({
           <UserOptionsDropdown conversation={conversation} />
         )}
       </Link>
-      {/* )} */}
     </>
   );
 };
