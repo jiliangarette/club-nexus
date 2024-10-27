@@ -26,10 +26,8 @@ const MessageItem = ({ message, attachmentClick }) => {
       </div>
       <div
         className={
-          " relative " +
-          // chat-bubble
-          (message.sender_id === currentUser.id ? "" : "")
-          // chat-bubble-info
+          "chat-bubble relative " +
+          (message.sender_id === currentUser.id ? "chat-bubble-info" : "")
         }
       >
         {message.sender_id == currentUser.id && (

@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'is_admin' => true
         ]);
-        User::factory()->create([
-            'name' => 'Garette Abadia',
-            'email' => 'garette@gmail.com',
-            'password' => bcrypt('password'),
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Garette Abadia',
+        //     'email' => 'garette@gmail.com',
+        //     'password' => bcrypt('password'),
+        // ]);
         // User::factory(10)->create();
 
         // for ($i = 0; $i < 5; $i++){
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         //     $users = User::inRandomOrder()->limit(rand(2, 5))->pluck('id');
         //     $group->users()->attach(array_unique([1 , ...$users]));
         // }
-        // Message::factory(1000)->create();
+        // Message::factory(100)->create();
         // $messages = Message::whereNull('group_id')->orderBy('created_at')->get();
 
         // $conversations = $messages->groupBy(function ($message) {

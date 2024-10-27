@@ -7,6 +7,7 @@ import {
   ShieldCheckIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
+import axios from "axios";
 import { useEventBus } from "@/EventBus";
 
 export default function UserOptionsDropdown({ conversation }) {
@@ -23,9 +24,9 @@ export default function UserOptionsDropdown({ conversation }) {
       .post(route("user.changeRole", conversation.id))
       .then((res) => {
         emit("toast.show", res.data.message);
-        console.log(res.data);
       })
       .catch((err) => {
+        alert("error toast");
         console.error(err);
       });
   };

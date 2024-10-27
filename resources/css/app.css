@@ -64,7 +64,7 @@
 
 .chat-message-content code {
   background-color: rgb(0, 0, 0, 0.1);
-  color: #a1266e;
+  color: #374ba3;
   padding: 3px 8px;
   border-radius: 5px;
   font-family: "Courier New", monospace;
@@ -134,14 +134,16 @@
 
 .chat-message-content table {
   width: 100%;
+  border-radius: 20px 20px 0 0;
+
   border-collapse: collapse;
-  margin: 16px 0;
+  margin: 0;
 }
 
 .chat-message-content th,
 .chat-message-content td {
   border: 1px solid #909090;
-  padding: 8px;
+  padding: 4px;
   text-align: left;
 }
 
