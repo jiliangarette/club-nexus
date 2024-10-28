@@ -7,7 +7,7 @@ import { useEventBus } from "@/EventBus";
 import GroupModal from "@/Components/App/GroupModal";
 import { route } from "ziggy-js";
 
-const ChatLayout = ({ children }) => {
+const FeedLayout = ({ children }) => {
   const page = usePage();
   const conversations = page.props.conversations;
   const selectedConversation = page.props.selectedConversation;
@@ -151,7 +151,7 @@ const ChatLayout = ({ children }) => {
     <>
       <div className="flex-1 w-full flex overflow-hidden ">
         <div
-          className={`transition-all w-full sm:w-[220px] md:w-[300px]  flex flex-col overflow-hidden
+          className={`transition-all w-full sm:w-[220px] md:w-[300px] flex flex-col overflow-hidden
                     ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
         >
           <div className="flex items-center justify-between py-2 px-3 text-xl font-medium">
@@ -197,4 +197,4 @@ const ChatLayout = ({ children }) => {
   );
 };
 
-export default ChatLayout;
+export default FeedLayout;
