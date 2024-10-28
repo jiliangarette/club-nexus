@@ -34,7 +34,7 @@ const ConversationHeader = ({ selectedConversation }) => {
   return (
     <>
       {selectedConversation && (
-        <div className="p-3 flex justify-between items-center border-b border-slate-700">
+        <div className=" p-3 flex justify-between items-center border-b border-slate-700">
           <div className="flex items-center gap-3">
             <Link href={route("dashboard")} className="inline-block sm:hidden">
               <ArrowLeftIcon className="w-6" />

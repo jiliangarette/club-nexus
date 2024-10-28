@@ -91,14 +91,15 @@ export default function Authenticated({ header, children }) {
   }, [conversations]);
   return (
     <>
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 h-screen flex flex-col">
-        <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+      <div className="min-h-screen bg-base dark:bg-gray-900 h-screen flex flex-col">
+        <nav className=" bg-base">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="shrink-0 flex items-center">
-                  <Link href="/">
+                  <Link href="/" className="flex items-center">
                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <div className="pt-2 font-extrabold  -mx-1"> EXUS</div>
                   </Link>
                 </div>
 
@@ -107,7 +108,13 @@ export default function Authenticated({ header, children }) {
                     href={route("dashboard")}
                     active={route().current("dashboard")}
                   >
-                    Dashboard
+                    Feed
+                  </NavLink>
+                  <NavLink
+                    href={route("chat")}
+                    active={route().current("chat")}
+                  >
+                    ClubChat
                   </NavLink>
                 </div>
               </div>
