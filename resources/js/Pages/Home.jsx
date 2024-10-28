@@ -1,9 +1,10 @@
 import ChatLayout from "@/Layouts/ChatLayout";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import FeedLayout from "@/Layouts/FeedLayout";
 
 function Home() {
   return (
-    <div className=" p-5 w-full h-full">
+    <div className=" pr-5 py-5 ml-5 h-full">
       <div className="w-full h-full bg-white shadow-sm rounded-lg overflow-hidden flex flex-col">
         <div className="flex h-1/6 w-full bg-red-400">HOME</div>
         <div className="flex h-full w-full bg-blue-400">Body</div>
@@ -16,7 +17,7 @@ function Home() {
 Home.layout = (page) => {
   return (
     <AuthenticatedLayout user={page.props.auth.user}>
-      <ChatLayout children={page} />
+      <FeedLayout children={page} />
     </AuthenticatedLayout>
   );
 };
