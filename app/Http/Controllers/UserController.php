@@ -1,21 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use App\Mail\UserCreated;
 use App\Mail\UserRoleChanged;
 use App\Mail\UserBlockedUnblocked;
-use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
+
 
 class UserController extends Controller
 {
-    public function store(Request $request) {
 
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'name' => 'required|string',
-            'email' => ['required','email' , 'unique:users,email' ],
+            'email' => ['required', 'email' , 'unique:users,email' ],
             'is_admin' => 'boolean',
         ]);
 
@@ -27,8 +29,7 @@ class UserController extends Controller
 
         Mail::to($user)->send(new UserCreated($user, $rawPassword));
 
-        return redirect()->back(); return redirect()->back()->with('message', 'User created successfully!');
-       
+        return redirect()->back()->with('message', 'User created successfully!');
     }
 
 
