@@ -16,12 +16,19 @@ export default {
       fontFamily: {
         sans: ["Figtree", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        base: "#f6f8fc",
+        button: "#c2e7ff",
+      },
+      borderRadius: {
+        lg: "15px",
+      },
     },
     screens: {
       xs: "420px",
       sm: "680px",
       md: "768px",
-      lg: "1024pz",
+      lg: "1024px",
       xl: "1280px",
     },
   },
@@ -29,6 +36,6 @@ export default {
   plugins: [forms, require("daisyui")],
 
   daisyui: {
-    themes: ["dark"],
+    themes: ["light"],
   },
 };
