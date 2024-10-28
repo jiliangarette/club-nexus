@@ -19,9 +19,12 @@ export default {
       colors: {
         base: "#f6f8fc",
         button: "#c2e7ff",
+        shade: "#eaf1fb",
+        grey: "#7c8086",
       },
       borderRadius: {
         lg: "15px",
+        xl: "25px",
       },
     },
     screens: {
