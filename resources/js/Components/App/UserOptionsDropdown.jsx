@@ -51,8 +51,8 @@ export default function UserOptionsDropdown({ conversation }) {
     <div>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="flex justify-center items-center w-8 h-8 rounded-full hover:bg-black/40">
-            <EllipsisVerticalIcon className="h-5 w-5" />
+          <Menu.Button className="flex justify-center items-center p-2 rounded-full hover:bg-black/10">
+            <EllipsisVerticalIcon className="h-4 w-4" />
           </Menu.Button>
         </div>
         <Transition
