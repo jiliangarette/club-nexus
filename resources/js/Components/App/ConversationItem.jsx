@@ -1,5 +1,5 @@
 import { Link, usePage } from "@inertiajs/react";
-import GroupAvatar from "./GroupAvatar";
+import GroupChatAvatar from "./GroupChatAvatar";
 import UserAvatar from "./UserAvatar";
 import UserOptionsDropdown from "./UserOptionsDropdown";
 import { route } from "ziggy-js";
@@ -39,17 +39,19 @@ const ConversationItem = ({
             : route("chat.user", conversation)
         }
         preserveState
-        className={`conversation-item flex place-items-center gap-2 justify-center ml-2 p-2 pt-1 mt-1 text-gray-900 transition-all cursor-pointer  rounded-xl ${classes}`}
+        className={`conversation-item flex place-items-center gap-2 justify-center ml-2 p-2 pt-1 mt-1 text-gray-900 transition-all cursor-pointer  rounded-xl ${classes} ${
+          conversation.blocked_at && "opacity-60"
+        }`}
       >
         {conversation.is_user && (
           <UserAvatar user={conversation} online={online} />
         )}
-        {conversation.is_group && <GroupAvatar />}
+        {conversation.is_group && <GroupChatAvatar />}
         <div
           className={
             `flex-1 text-xs max-w-full overflow-hidden ` +
             (conversation.is_user && conversation.blocked_at
-              ? "opacity-50"
+              ? "opacity-50 "
               : "")
           }
         >
