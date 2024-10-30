@@ -4,8 +4,8 @@ import { NewspaperIcon } from "@heroicons/react/24/solid";
 
 function Home() {
   return (
-    <div className=" pr-5 py-5 ml-5 h-full">
-      <div className="w-full h-full bg-white shadow-sm rounded-lg overflow-hidden flex flex-col">
+    <div className=" sm:pr-5 sm:py-5 h-full">
+      <div className="w-full h-full bg-base sm:bg-white shadow-sm rounded-lg overflow-hidden flex flex-col">
         {true && (
           <div className="flex flex-col gap-8 justify-center items-center text-center h-full opacity-35">
             <div className="text-2xl md:text-4xl p-16 text-text-gray-800">
