@@ -12,8 +12,8 @@ export default function GroupUsersPopover({ users = [] }) {
         <>
           <Popover.Button
             className={`${
-              open ? "text-gray-200" : "text-gray-400"
-            } hover:text-gray-200 `}
+              open ? "text-blue-500" : "text-gray-500"
+            } hover:text-gray-800 `}
           >
             <UsersIcon className="w-4" />
           </Popover.Button>
@@ -27,12 +27,12 @@ export default function GroupUsersPopover({ users = [] }) {
             leaveTo="opacity-0 translate-y-1"
           >
             <Popover.Panel className="absolute right-0 z-20 mt-3 w-[200px] max-w-sm  px-4 sm:px-0 ">
-              <div className="bg-gray-800 py-2">
+              <div className="bg-shade rounded-lg py-2">
                 {users.map((user) => (
                   <Link
                     href={route("chat.user", user.id)}
                     key={user.id}
-                    className="flex items-center py-2 gap-2 px-3 hover:bg-black/30 "
+                    className="flex items-center py-2 gap-2 px-3 hover:bg-blue-100 "
                   >
                     <UserAvatar user={user} />
                     <div className="text-xs">{user.name}</div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark h-screen">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class=" h-screen">
 
 <head>
  <meta charset="utf-8">
@@ -19,5 +19,6 @@
 <body class="font-sans antialiased h-screen">
  @inertia
 </body>
+        <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
 </html>

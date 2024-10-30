@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 //imported idk if its correct
 
 
-class MessageController extends Controller
+class FeedController extends Controller
 {
     public function byUser(User $user)
     {

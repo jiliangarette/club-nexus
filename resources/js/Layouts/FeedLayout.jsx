@@ -3,56 +3,47 @@ import { useEffect, useState } from "react";
 import {
   ChatBubbleOvalLeftIcon,
   HomeModernIcon,
+  MagnifyingGlassIcon,
   MegaphoneIcon,
-  PencilSquareIcon,
   PlusCircleIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/solid";
 import TextInput from "@/Components/TextInput";
-import ConversationItem from "@/Components/App/ConversationItem";
 import { useEventBus } from "@/EventBus";
 import GroupModal from "@/Components/App/GroupModal";
 import { route } from "ziggy-js";
+import ClubFeedItem from "@/Components/App/ClubFeedItem";
 import PrimaryButton from "@/Components/PrimaryButton";
+import NewUserModal from "@/Components/App/NewUserModal";
 import SecondaryButton from "@/Components/SecondaryButton";
 
-const ChatLayout = ({ children }) => {
+const FeedLayout = ({ children }) => {
   const page = usePage();
   const conversations = page.props.conversations;
   const selectedConversation = page.props.selectedConversation;
-  const [onlineUsers, setOnlineUsers] = useState({});
   const [localConversations, setLocalConversations] = useState([]);
   const [sortedConversations, setSortedConversations] = useState([]);
   const [showGroupModal, setShowGroupModal] = useState(false);
   const [wideSidebar, setWideSidebar] = useState(true);
   const [showNewUserModal, setShowNewUserModal] = useState(false);
-  const user = page.props.auth.user;
-
-  const isUserOnline = (userId) => onlineUsers[userId];
   const { on, emit } = useEventBus();
+  const user = page.props.auth.user;
 
   const onSearch = (ev) => {
     const search = ev.target.value.toLowerCase();
     setLocalConversations(
-      conversations.filter((conversation) => {
-        return conversation.name.toLowerCase().includes(search);
-      })
+      conversations.filter(
+        (conversation) =>
+          conversation.is_group &&
+          conversation.name.toLowerCase().includes(search)
+      )
     );
   };
+
   const messageCreated = (message) => {
     setLocalConversations((oldUsers) => {
       return oldUsers.map((u) => {
-        if (
-          message.receiver_id &&
-          !u.is_group &&
-          (u.id === message.sender_id || u.id == message.receiver_id)
-        ) {
-          u.last_message = message.message;
-          u.last_message_date = message.created_at;
-          return u;
-        }
-
-        if (message.group_id && !u.is_group && u.id == message.group_id) {
+        if (message.group_id && u.is_group && u.id == message.group_id) {
           u.last_message = message.message;
           u.last_message_date = message.created_at;
           return u;
@@ -66,17 +57,17 @@ const ChatLayout = ({ children }) => {
     if (!prevMessage) {
       return;
     }
-
     messageCreated(prevMessage);
   };
 
   useEffect(() => {
     const offCreated = on("message.created", messageCreated);
     const offDeleted = on("message.deleted", messageDeleted);
-    const offModalShow = on("GroupModal.show", (group) => {
+    const offModalShow = on("GroupModal.show", () => {
       setShowGroupModal(true);
     });
     console.log(page.props);
+
     const offGroupDelete = on("group.deleted", ({ id, name }) => {
       setLocalConversations((oldConversations) => {
         return oldConversations.filter((con) => con.id != id);
@@ -100,25 +91,27 @@ const ChatLayout = ({ children }) => {
 
   useEffect(() => {
     setSortedConversations(
-      localConversations.sort((a, b) => {
-        if (a.blocked_at && b.blocked_at) {
-          return a.blocked_at > b.blocked_at ? 1 : -1;
-        } else if (a.blocked_at) {
-          return 1;
-        } else if (b.blocked_at) {
-          return -1;
-        }
+      localConversations
+        .filter((conversation) => conversation.is_group) // Filter only groups
+        .sort((a, b) => {
+          if (a.blocked_at && b.blocked_at) {
+            return a.blocked_at > b.blocked_at ? 1 : -1;
+          } else if (a.blocked_at) {
+            return 1;
+          } else if (b.blocked_at) {
+            return -1;
+          }
 
-        if (a.last_message_date && b.last_message_date) {
-          return b.last_message_date.localeCompare(a.last_message_date);
-        } else if (a.last_message_date) {
-          return -1;
-        } else if (b.last_message_date) {
-          return 1;
-        } else {
-          return 0;
-        }
-      })
+          if (a.last_message_date && b.last_message_date) {
+            return b.last_message_date.localeCompare(a.last_message_date);
+          } else if (a.last_message_date) {
+            return -1;
+          } else if (b.last_message_date) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
     );
   }, [localConversations]);
 
@@ -126,50 +119,33 @@ const ChatLayout = ({ children }) => {
     setLocalConversations(conversations);
   }, [conversations]);
 
-  useEffect(() => {
-    Echo.join("online")
-      .here((users) => {
-        const onlineUserObj = Object.fromEntries(
-          users.map((user) => [user.id, user])
-        );
-        0;
-
-        setOnlineUsers((prevOnlineUsers) => {
-          return { ...prevOnlineUsers, ...onlineUserObj };
-        });
-      })
-      .joining((user) => {
-        setOnlineUsers((prevOnlineUsers) => {
-          const updatedUsers = { ...prevOnlineUsers };
-          updatedUsers[user.id] = user;
-          return updatedUsers;
-        });
-      })
-      .leaving((user) => {
-        setOnlineUsers((prevOnlineUsers) => {
-          const updatedUsers = { ...prevOnlineUsers };
-          delete updatedUsers[user.id];
-          return updatedUsers;
-        });
-      })
-      .error((error) => {
-        console.error("error", error);
-      });
-
-    return () => {
-      Echo.leave("online");
-    };
-  }, []);
   const handleSidebisarWidth = () => {
     setWideSidebar(!wideSidebar);
   };
+
   return (
     <>
-      <div className="flex-1 w-full flex overflow-hidden ">
+      <div className="flex-1 w-full flex sm:overflow-hidden relative flex-col sm:flex-row">
         <div
-          className={`transition-all w-full sm:w-[220px] md:w-[300px]  flex flex-col
-                    ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
+          className="fixed top-4 transition-all duration-300 ease-in-out hover:opacity-90 left-4 cursor-pointer hover:bg-shade p-2 rounded-md hidden sm:block"
+          onClick={handleSidebisarWidth}
         >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
+        <div className="flex flex-col">
           <div className="hover:bg-gray-100 rounded-lg hideen sm:block sm:flex-col flex px-2 sm:my-6">
             <div className=" w-full hidden sm:block text-sm font-semibold text-gray-500 pl-8 mt-3 h-8 p-2 ">
               {wideSidebar ? "Shortcuts" : ""}
@@ -179,28 +155,26 @@ const ChatLayout = ({ children }) => {
               className="tooltip sm:tooltip-right py-[1px] sm:px-2 pl-[6px] flex w-full"
               data-tip="Community Feed"
             >
-              <Link href={route("feed")} className="w-full">
-                <SecondaryButton
-                  onClick={() => setShowNewUserModal(true)}
-                  className={`border-none  w-full justify-center sm:justify-start flex`}
-                >
-                  <HomeModernIcon className="w-4 h-4" />
-                  {wideSidebar ? (
-                    <span className="ml-2 text-nowrap sm:block hidden ">
-                      Feed
-                    </span>
-                  ) : (
-                    ""
-                  )}
-                </SecondaryButton>
-              </Link>
+              <PrimaryButton
+                onClick={() => setShowNewUserModal(true)}
+                className={`border-none  w-full justify-center sm:justify-start flex`}
+              >
+                <HomeModernIcon className="w-4 h-4" />
+                {wideSidebar ? (
+                  <span className="ml-2 text-nowrap sm:block hidden ">
+                    Feed
+                  </span>
+                ) : (
+                  ""
+                )}
+              </PrimaryButton>
             </div>
             <div
               className="tooltip sm:tooltip-right py-[2px] sm:px-2 pl-[6px] flex w-full "
               data-tip="Club Chat"
             >
               <Link href={route("chat")} className="w-full">
-                <PrimaryButton
+                <SecondaryButton
                   className={`border-none  w-full justify-center sm:justify-start flex`}
                 >
                   <ChatBubbleOvalLeftIcon className="w-4 h-4" />
@@ -211,7 +185,7 @@ const ChatLayout = ({ children }) => {
                   ) : (
                     ""
                   )}
-                </PrimaryButton>
+                </SecondaryButton>
               </Link>
             </div>
             <div
@@ -274,29 +248,32 @@ const ChatLayout = ({ children }) => {
               </>
             )}
           </div>
-          <div className="p-3">
-            <TextInput
-              onKeyUp={onSearch}
-              placeholder="Filter users and groups"
-              className="w-full p-2 pl-4"
-            />
-          </div>
+          <div
+            className={`transition-all w-full sm:w-[50px]  md:${
+              wideSidebar && "w-[300px]"
+            } flex flex-col
+                    `}
+          >
+            <div className="sm:flex-1 flex sm:flex-col overflow-x-scroll sm:my-4">
+              <div className="w-full hidden sm:block text-sm font-semibold text-gray-500 pl-8 mt-3 h-8 p-2 pb-1 ">
+                {wideSidebar ? "Clubs" : ""}
+              </div>
 
-          <div className="flex-1 overflow-auto">
-            {sortedConversations &&
-              sortedConversations.map((conversation) => (
-                <ConversationItem
-                  key={`${conversation.is_group ? "group_" : "user_"}${
-                    conversation.id
-                  }`}
+              {sortedConversations.map((conversation) => (
+                <ClubFeedItem
+                  key={`group_${conversation.id}`}
                   conversation={conversation}
-                  online={!!isUserOnline(conversation.id)}
                   selectedConversation={selectedConversation}
                 />
               ))}
+            </div>
           </div>
         </div>
-        <div className="flex-1 flex flex-col ">{children}</div>
+        <NewUserModal
+          show={showNewUserModal}
+          onClose={() => setShowNewUserModal(false)}
+        />
+        <div className="flex-1 flex flex-col overflow-hidden">{children}</div>
       </div>
 
       <GroupModal
@@ -307,4 +284,4 @@ const ChatLayout = ({ children }) => {
   );
 };
 
-export default ChatLayout;
+export default FeedLayout;
