@@ -1,11 +1,20 @@
-import { router, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
+import {
+  ChatBubbleOvalLeftIcon,
+  HomeModernIcon,
+  MegaphoneIcon,
+  PencilSquareIcon,
+  PlusCircleIcon,
+  UserPlusIcon,
+} from "@heroicons/react/24/solid";
 import TextInput from "@/Components/TextInput";
 import ConversationItem from "@/Components/App/ConversationItem";
 import { useEventBus } from "@/EventBus";
 import GroupModal from "@/Components/App/GroupModal";
 import { route } from "ziggy-js";
+import PrimaryButton from "@/Components/PrimaryButton";
+import SecondaryButton from "@/Components/SecondaryButton";
 
 const ChatLayout = ({ children }) => {
   const page = usePage();
@@ -15,6 +24,10 @@ const ChatLayout = ({ children }) => {
   const [localConversations, setLocalConversations] = useState([]);
   const [sortedConversations, setSortedConversations] = useState([]);
   const [showGroupModal, setShowGroupModal] = useState(false);
+  const [wideSidebar, setWideSidebar] = useState(true);
+  const [showNewUserModal, setShowNewUserModal] = useState(false);
+  const user = page.props.auth.user;
+
   const isUserOnline = (userId) => onlineUsers[userId];
   const { on, emit } = useEventBus();
 
@@ -63,7 +76,7 @@ const ChatLayout = ({ children }) => {
     const offModalShow = on("GroupModal.show", (group) => {
       setShowGroupModal(true);
     });
-
+    console.log(page.props);
     const offGroupDelete = on("group.deleted", ({ id, name }) => {
       setLocalConversations((oldConversations) => {
         return oldConversations.filter((con) => con.id != id);
@@ -74,7 +87,7 @@ const ChatLayout = ({ children }) => {
         !selectedConversation ||
         (selectedConversation.is_group && selectedConversation.id == id)
       ) {
-        router.visit(route("dashboard"));
+        router.visit(route("feed"));
       }
     });
     return () => {
@@ -147,31 +160,128 @@ const ChatLayout = ({ children }) => {
       Echo.leave("online");
     };
   }, []);
+  const handleSidebisarWidth = () => {
+    setWideSidebar(!wideSidebar);
+  };
   return (
     <>
       <div className="flex-1 w-full flex overflow-hidden ">
         <div
-          className={`transition-all w-full sm:w-[220px] md:w-[300px]  flex flex-col overflow-hidden
+          className={`transition-all w-full sm:w-[220px] md:w-[300px]  flex flex-col
                     ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
         >
-          <div className="flex items-center justify-between py-2 px-3 text-xl font-medium">
-            My Conversations
-            <div className="tooltip tooltip-left" data-tip="Create new Group">
-              <button
-                onClick={() => setShowGroupModal(true)}
-                className="text-gray-400 hover:text-gray-200"
-              >
-                <PencilSquareIcon className="w-4 h-4 inline-block ml-2" />
-              </button>
+          <div className="hover:bg-gray-100 rounded-lg hideen sm:block sm:flex-col flex px-2 sm:my-6">
+            <div className=" w-full hidden sm:block text-sm font-semibold text-gray-500 pl-8 mt-3 h-8 p-2 ">
+              {wideSidebar ? "Shortcuts" : ""}
             </div>
+
+            <div
+              className="tooltip sm:tooltip-right py-[1px] sm:px-2 pl-[6px] flex w-full"
+              data-tip="Community Feed"
+            >
+              <Link href={route("feed")} className="w-full">
+                <SecondaryButton
+                  onClick={() => setShowNewUserModal(true)}
+                  className={`border-none  w-full justify-center sm:justify-start flex`}
+                >
+                  <HomeModernIcon className="w-4 h-4" />
+                  {wideSidebar ? (
+                    <span className="ml-2 text-nowrap sm:block hidden ">
+                      Feed
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </SecondaryButton>
+              </Link>
+            </div>
+            <div
+              className="tooltip sm:tooltip-right py-[2px] sm:px-2 pl-[6px] flex w-full "
+              data-tip="Club Chat"
+            >
+              <Link href={route("chat")} className="w-full">
+                <PrimaryButton
+                  className={`border-none  w-full justify-center sm:justify-start flex`}
+                >
+                  <ChatBubbleOvalLeftIcon className="w-4 h-4" />
+                  {wideSidebar ? (
+                    <span className="ml-2 text-nowrap sm:block hidden ">
+                      Chat
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </PrimaryButton>
+              </Link>
+            </div>
+            <div
+              className="tooltip sm:tooltip-right py-[2px] sm:px-2 pl-[6px] flex w-full "
+              data-tip="Announcement"
+            >
+              <SecondaryButton
+                onClick={() => setShowNewUserModal(true)}
+                className={`border-none  w-full justify-center sm:justify-start flex`}
+              >
+                <MegaphoneIcon className="w-4 h-4" />
+                {wideSidebar ? (
+                  <span className="ml-2 text-nowrap sm:block hidden ">
+                    Announcement
+                  </span>
+                ) : (
+                  ""
+                )}
+              </SecondaryButton>
+            </div>
+            {user.is_admin && (
+              <>
+                <div
+                  className="tooltip sm:tooltip-right sm:px-2 pl-[6px] py-[2px] flex w-full"
+                  data-tip="Create new use"
+                >
+                  <SecondaryButton
+                    onClick={() => setShowNewUserModal(true)}
+                    className={`border-none  w-full justify-center sm:justify-start flex`}
+                  >
+                    <UserPlusIcon className="w-4 h-4" />
+                    {wideSidebar ? (
+                      <span className="ml-2 text-nowrap sm:block hidden ">
+                        Add New User
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </SecondaryButton>
+                </div>
+
+                <div
+                  className="tooltip sm:tooltip-right sm:px-2 pl-[6px] py-[2px] flex w-full"
+                  data-tip="Create new use"
+                >
+                  <SecondaryButton
+                    onClick={() => setShowGroupModal(true)}
+                    className={`border-none  w-full justify-center sm:justify-start flex`}
+                  >
+                    <PlusCircleIcon className="w-4 h-4" />
+                    {wideSidebar ? (
+                      <span className="ml-2 text-nowrap sm:block hidden ">
+                        Create bew group
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </SecondaryButton>
+                </div>
+              </>
+            )}
           </div>
           <div className="p-3">
             <TextInput
               onKeyUp={onSearch}
               placeholder="Filter users and groups"
-              className="w-full p-2"
+              className="w-full p-2 pl-4"
             />
           </div>
+
           <div className="flex-1 overflow-auto">
             {sortedConversations &&
               sortedConversations.map((conversation) => (
@@ -186,7 +296,7 @@ const ChatLayout = ({ children }) => {
               ))}
           </div>
         </div>
-        <div className="flex-1 flex flex-col overflow-hidden">{children}</div>
+        <div className="flex-1 flex flex-col ">{children}</div>
       </div>
 
       <GroupModal

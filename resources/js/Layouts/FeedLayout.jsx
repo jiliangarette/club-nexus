@@ -78,7 +78,7 @@ const FeedLayout = ({ children }) => {
         !selectedConversation ||
         (selectedConversation.is_group && selectedConversation.id == id)
       ) {
-        router.visit(route("dashboard"));
+        router.visit(route("feed"));
       }
     });
     return () => {
@@ -252,9 +252,9 @@ const FeedLayout = ({ children }) => {
             className={`transition-all w-full sm:w-[50px]  md:${
               wideSidebar && "w-[300px]"
             } flex flex-col
-                    ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
+                    `}
           >
-            <div className="flex-1 overflow-auto my-4">
+            <div className="sm:flex-1 flex sm:flex-col overflow-x-scroll sm:my-4">
               <div className="w-full hidden sm:block text-sm font-semibold text-gray-500 pl-8 mt-3 h-8 p-2 pb-1 ">
                 {wideSidebar ? "Clubs" : ""}
               </div>
