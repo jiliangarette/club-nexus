@@ -36,7 +36,7 @@ const ConversationHeader = ({ selectedConversation }) => {
       {selectedConversation && (
         <div className=" p-3 flex justify-between items-center border-b border-slate-700">
           <div className="flex items-center gap-3">
-            <Link href={route("dashboard")} className="inline-block sm:hidden">
+            <Link href={route("chat")} className="inline-block sm:hidden">
               <ArrowLeftIcon className="w-6" />
             </Link>
             {selectedConversation.is_user && (

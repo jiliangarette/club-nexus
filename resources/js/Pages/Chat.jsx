@@ -144,10 +144,10 @@ function Chat({ selectedConversation = null, messages = null }) {
   }, [localMessages, noMoreMessages]);
   return (
     <>
-      <div className=" p-5 w-full h-full">
+      <div className=" sm:p-5 w-full h-full">
         <div className="w-full h-full bg-white shadow-sm rounded-lg overflow-hidden flex flex-col">
           {!messages && (
-            <div className="flex flex-col gap-8 justify-center items-center text-center h-full opacity-35">
+            <div className="sm:flex flex-col gap-8 justify-center hidden items-center text-center h-full opacity-35">
               <div className="text-2xl md:text-4xl p-16 text-slate-200">
                 Please select conversation to see messages
               </div>
