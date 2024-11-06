@@ -1,22 +1,23 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import GroupAvatar from "./GroupAvatar";
 import { route } from "ziggy-js";
 
-const ClubFeedItem = ({ conversation, selectedConversation = null }) => {
-  const isActive =
-    selectedConversation?.is_group &&
-    selectedConversation.id === conversation.id;
-  const classes = isActive ? "bg-button" : "bg-shade";
+const ClubFeedItem = ({ club, style, margin }) => {
+  const page = usePage();
+  const classes =
+    club.id === page.props.groupId ? `${margin}` : "bg-shade sm:bg-base";
 
   return (
     <Link
-      href={route("feed.group", conversation)}
+      href={route("feed.group", club)}
       preserveState
-      className={`conversation-item flex place-items-center gap-2 justify-center ml-2 p-1 sm:p-2 text-gray-900 transition-all cursor-pointer  rounded-xl hover:bg-blue-100 my-1 ${classes}`}
+      className={`club-item flex items-center gap-2 justify-center ml-2 p-1 px-2 sm:px-4 sm:w-fit text-gray-900 transition-all cursor-pointer rounded-xl hover:bg-blue-100 my-1  ${classes} `}
     >
-      <GroupAvatar />
-      <h3 className="text-[12px] sm:text-sm sm:font-semibold flex-1 text-ellipsis overflow-hidden text-nowrap">
-        {conversation.name}
+      <GroupAvatar data={club.name} />
+      <h3
+        className={`text-[12px] sm:text-sm sm:font-semibold flex-1 truncate ${style}`}
+      >
+        {club.name}
       </h3>
     </Link>
   );
