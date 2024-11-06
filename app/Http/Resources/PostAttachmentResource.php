@@ -4,10 +4,12 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
-class MessageResource extends JsonResource
+class PostAttachmentResource extends JsonResource
 {
     public static $wrap = false;
+
     /**
      * Transform the resource into an array.
      *
@@ -17,12 +19,11 @@ class MessageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'message' => $this->message,
-            'sender_id' => $this->sender_id,
-            'receiver_id' => $this->receiver_id,
-            'sender' => new UserResource($this->sender),
-            'group_id' => $this->group_id,
-            'attachments' => PostAttachmentResource::collection($this->attachments),
+            'post_id' => $this->post_id, // Links attachment to specific post
+            'name' => $this->name, // Original file name
+            'mime' => $this->mime, // MIME type (e.g., image/jpeg)
+            'size' => $this->size, // File size in bytes
+            'url' => Storage::url($this->path), // Public URL of the attachment
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
