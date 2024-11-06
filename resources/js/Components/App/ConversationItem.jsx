@@ -12,7 +12,7 @@ const ConversationItem = ({
 }) => {
   const page = usePage();
   const currentUser = page.props.auth.user;
-  let classes = "bg-shade";
+  let classes = " bg-base hover:bg-shade";
   if (selectedConversation) {
     if (
       !selectedConversation.is_group &&
