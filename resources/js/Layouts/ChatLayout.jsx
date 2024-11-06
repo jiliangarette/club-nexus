@@ -167,7 +167,7 @@ const ChatLayout = ({ children }) => {
     <>
       <div className="flex-1 w-full flex overflow-hidden ">
         <div
-          className={`transition-all w-full sm:w-[220px] md:w-[300px]  flex flex-col
+          className={`transition-all w-full sm:w-[220px] md:w-[300px]  flex-col
                     ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}
         >
           <div className="hover:bg-gray-100 rounded-lg hideen sm:block sm:flex-col flex px-2 sm:my-6">
@@ -245,7 +245,7 @@ const ChatLayout = ({ children }) => {
                     <UserPlusIcon className="w-4 h-4" />
                     {wideSidebar ? (
                       <span className="ml-2 text-nowrap sm:block hidden ">
-                        Add New User
+                        Add new user
                       </span>
                     ) : (
                       ""
@@ -255,7 +255,7 @@ const ChatLayout = ({ children }) => {
 
                 <div
                   className="tooltip sm:tooltip-right sm:px-2 pl-[6px] py-[2px] flex w-full"
-                  data-tip="Create new use"
+                  data-tip="Create new user"
                 >
                   <SecondaryButton
                     onClick={() => setShowGroupModal(true)}

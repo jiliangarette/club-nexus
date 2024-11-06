@@ -90,7 +90,7 @@ export default function Authenticated({ header, children }) {
   }, [conversations]);
   return (
     <>
-      <div className="min-h-screen bg-base dark:bg-gray-900 h-screen flex flex-col">
+      <div className="min-h-screen bg-base dark:bg-gray-900 flex flex-col ">
         <nav className=" bg-base">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
@@ -207,7 +207,7 @@ export default function Authenticated({ header, children }) {
           </div>
         </nav>
         {header && (
-          <header className="bg-white dark:bg-gray-800 shadow">
+          <header className="bg-white dark:bg-gray-800 shadow ">
             <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
               {header}
             </div>

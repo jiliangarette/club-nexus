@@ -9,6 +9,8 @@ import { useEventBus } from "@/EventBus";
 import { route } from "ziggy-js";
 import axios from "axios";
 import AttachmentPreviewModal from "@/Components/App/AttachmentPreviewModal";
+import DefaultChatDisplay from "@/Components/App/DefaultChatDisplay";
+import PostCreationDrawer from "../Components/App/PostCreationDrawer";
 
 function Chat({ selectedConversation = null, messages = null }) {
   const [localMessages, setLocalMessages] = useState([]);
@@ -148,10 +150,7 @@ function Chat({ selectedConversation = null, messages = null }) {
         <div className="w-full h-full bg-white shadow-sm rounded-lg overflow-hidden flex flex-col">
           {!messages && (
             <div className="sm:flex flex-col gap-8 justify-center hidden items-center text-center h-full opacity-35">
-              <div className="text-2xl md:text-4xl p-16 text-slate-200">
-                Please select conversation to see messages
-              </div>
-              <ChatBubbleLeftRightIcon className="w-32 h-32 inline-block" />
+              <DefaultChatDisplay />
             </div>
           )}
           {messages && (

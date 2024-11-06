@@ -16,35 +16,50 @@ class Group extends Model
         'last_message_id',
     ];
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany(User::class, 'group_users');
     }
 
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany(Message::class);
     }
 
-    public function owner(){
+    public function owner()
+    {
         return $this->belongsTo(User::class);
     }
 
-
-    public function lastMessage(){
+    public function lastMessage()
+    {
         return $this->belongsTo(Message::class, 'last_message_id');
+    }
+    
+
+    // New relationship for likes
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'post_id'); // Assuming 'post_id' relates to a posts table
     }
 
     public static function getGroupsForUser(User $user)
     {
-    $query = self::select(['groups.*', 'messages.message as last_message',
-    'messages.created_at as last_message_date'])
-    ->join('group_users', 'group_users.group_id', '=', 'groups.id')
-    ->leftJoin('messages' , 'messages.id' , '=', 'groups.last_message_id')
-    ->where('group_users.user_id', $user->id)
-    ->orderBy('messages.created_at', 'desc')
-    ->orderBy('groups.name');
+        $query = self::select(['groups.*',
+            'messages.message as last_message',
+            'messages.created_at as last_message_date',
+            'likes.created_at as last_like_date']) // Add last_like_date
+            ->join('group_users', 'group_users.group_id', '=', 'groups.id')
+            ->leftJoin('messages', 'messages.id', '=', 'groups.last_message_id')
+            ->leftJoin('likes', 'likes.post_id', '=', 'groups.id') // Join likes table
+            ->where('group_users.user_id', $user->id)
+            ->orderBy('messages.created_at', 'desc')
+            ->orderBy('likes.created_at', 'desc') // Order by likes
+            ->orderBy('groups.name');
 
-    return $query->get();
+        return $query->get();
     }
+
     public function toConversationArray()
     {
         return [
@@ -55,11 +70,12 @@ class Group extends Model
             'is_user' => false,
             'owner_id' => $this->owner_id,
             'users' => $this->users,
-            'user_ids' =>  $this->users->pluck('id'),
-            'created_at' =>  $this->created_at,
-            'updated_at' =>  $this->updated_at,
-            'last_message' =>  $this->last_message,
-            'last_message_date' =>  $this->last_message_date ? ($this->last_message_date . ' UTC') : null,
+            'user_ids' => $this->users->pluck('id'),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'last_message' => $this->last_message,
+            'last_message_date' => $this->last_message_date ? ($this->last_message_date . ' UTC') : null,
+            'last_like_date' => $this->last_like_date ? ($this->last_like_date . ' UTC') : null, // Add last_like_date to response
         ];
     }
 
@@ -70,4 +86,6 @@ class Group extends Model
             ['last_message_id' => $message->id]
         );
     }
+
+    
 }
