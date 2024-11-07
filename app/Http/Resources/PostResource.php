@@ -34,8 +34,7 @@ public function toArray($request)
         'group_id' => $this->group_id,
         'created_at' => $this->created_at,
         'updated_at' => $this->updated_at,
-        
-        // Eager-loaded user details
+
         'user' => [
             'id' => $this->user->id,
             'is_admin' => $this->user->is_admin,
@@ -43,7 +42,6 @@ public function toArray($request)
             'avatar_url' => $this->user->avatar ? '/storage/' . $this->user->avatar : null,
         ],
 
-        // Eager-loaded attachments
         'attachments' => $this->attachments->map(function ($attachment) {
             return [
                 'id' => $attachment->id,

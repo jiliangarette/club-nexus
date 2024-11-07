@@ -35,7 +35,7 @@ class GroupController extends Controller
     {
         if ($group->owner_id !== auth()->user()->id) {
         abort(403);
-    }
+        }
 
 
       DeleteGroupJob::dispatch($group)->delay(now()->addSeconds(1));
@@ -44,27 +44,3 @@ class GroupController extends Controller
 
     }
 }
-
-
-/**
-* index
-* Display a listing of the resource.
-*
-* create
-* Show the form for creating a new resource.
-*
-*store
-* Store a newly created resource in storage.
-*
-*show
-* Display the specified resource.
-*
-*edit
-* Show the form for editing the specified resource.
-*
-*update
-* Update the specified resource in storage.
-*
-*destroy
-* Remove the specified resource from storage.
-*/

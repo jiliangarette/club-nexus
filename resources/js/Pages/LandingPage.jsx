@@ -1,10 +1,5 @@
-import PostCreationDrawer from "@/Components/App/PostCreationDrawer";
-import LoadingState from "@/Components/App/LoadingState";
-import Line from "@/Components/mock/Line";
-import Loading from "@/Components/mock/Loading";
 import { Link } from "@inertiajs/react";
 import React from "react";
-import PostItem from "@/Components/App/PostItem";
 
 export default function LandingPage() {
   return (
