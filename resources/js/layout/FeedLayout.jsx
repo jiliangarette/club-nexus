@@ -80,18 +80,23 @@ const FeedLayout = ({ children }) => {
                 </div>
 
                 <div className=" py-[2px] sm:px-2 pl-[6px] flex w-full ">
-                  <NavigationButton
-                    className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
+                  <Link
+                    href={route("announcement")}
+                    className="w-full sm:flex sm:justify-start"
                   >
-                    <Megaphone size={24} className="text-slate-500" />
-                    {wideSidebar ? (
-                      <span className="ml-2 text-nowrap sm:block hidden ">
-                        Announcement
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </NavigationButton>
+                    <NavigationButton
+                      className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
+                    >
+                      <Megaphone size={24} className="text-slate-500" />
+                      {wideSidebar ? (
+                        <span className="ml-2 text-nowrap sm:block hidden ">
+                          Announcement
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </NavigationButton>
+                  </Link>
                 </div>
                 <div className=" py-[2px] sm:px-2 pl-[6px] flex w-full ">
                   <Link

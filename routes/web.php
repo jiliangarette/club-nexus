@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\GroupController;
@@ -17,6 +18,9 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
 
     Route::get('/chat',
         [ChatController::class, 'chat'])->name('chat');
+
+    Route::get('/announcement',
+        [AnnouncementController::class, 'announcement'])->name('announcement');
 
     Route::get('chat/member/{user}',
         [MessageController::class, 'byUser'])->name('chat.user');
