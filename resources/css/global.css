@@ -1,0 +1,223 @@
+#app {
+  height: 100vh;
+}
+
+.EmojiPickerReact.epr-dark-theme {
+  background-color: theme("colors.gray.800");
+}
+
+.EmojiPickerReact.epr-dark-theme .epr-emoji-category-label {
+  background-color: theme("colors.gray.800");
+}
+
+.conversation-item .avatar.online:before,
+.conversation-item .avatar.offline:before {
+  width: 8px;
+  height: 8px;
+  top: 1%;
+  right: 1%;
+  outline-width: 1px;
+}
+
+.chat-message-content > * {
+  margin: 0 0 8px 0;
+  line-height: 1.6;
+}
+
+.chat-message-content h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.chat-message-content h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.chat-message-content h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.chat-message-content blockquote {
+  padding: 12px;
+  margin-left: 15px;
+  border-left: 4px solid #3d718a;
+  border-radius: 4px;
+}
+
+.chat-message-content pre {
+  background-color: rgb(0, 0, 0, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  font-family: "Courier New", monospace;
+  overflow: auto;
+  font-size: 90%;
+}
+
+.chat-message-content code {
+  background-color: rgb(0, 0, 0, 0.1);
+  color: #f9fbff;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+}
+
+.chat-message-content hr {
+  border: none;
+  border-top: 1px solid #909090;
+  margin: 12px 0;
+}
+.chat-message-content pre code {
+  background-color: transparent;
+}
+.chat-message-content ul,
+.chat-message-content ol {
+  padding-left: 20px;
+}
+
+.chat-message-content ul {
+  list-style-type: disc;
+}
+
+.chat-message-content ol {
+  list-style-type: decimal;
+}
+
+.chat-message-content li {
+  margin-bottom: 6px;
+}
+
+.chat-message-content a {
+  color: #3f4fbc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.chat-message-content a:hover {
+  text-decoration: underline;
+}
+
+.chat-message-content figure {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.chat-message-content figcaption {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.chat-message-content dl {
+  padding: 0;
+}
+
+.chat-message-content dt {
+  font-weight: bold;
+}
+
+.chat-message-content dd {
+  margin-left: 20px;
+}
+
+.chat-message-content p {
+  margin-bottom: 2px;
+}
+
+.chat-message-content table {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.chat-message-content th,
+.chat-message-content td {
+  border: 1px solid #909090;
+  padding: 4px;
+  text-align: left;
+}
+
+.chat-message-content th {
+  background-color: rgb(0, 0, 0, 0.3);
+  font-weight: 600;
+}
+
+.chat-message-content tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.chat-message-content tr:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.chat-message-content table {
+  display: table;
+  width: 100%;
+}
+
+.chat-message-content th {
+  display: table-cell;
+}
+
+.chat-message-content td {
+  display: table-cell;
+}
+
+/* Loading demo */
+
+.loader {
+  display: block;
+  --height-of-loader: 3px;
+  --loader-color: #1b1b1b;
+  width: 200px;
+  height: var(--height-of-loader);
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  background: var(--loader-color);
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 30px;
+  animation: moving 1s ease-in-out infinite;
+}
+
+/* In your global CSS or a CSS module */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.chat-end .chat-bubble:before,
+.chat-start .chat-bubble:before {
+  background-color: transparent;
+  mask-image: none;
+  inset-inline-start: 0;
+}
+
+.chat-bubble {
+  border-radius: 12px !important;
+}

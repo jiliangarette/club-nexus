@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMessageRequest;
-use Illuminate\Http\Request;
-
-use App\Models\User;
+use App\Http\Resources\MessageResource;
+use Illuminate\Support\Facades\Storage;
+use App\Models\MessageAttachment;
+use Illuminate\Support\Str;
+use App\Events\SocketMessage;
+use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\Group;
-use App\Models\MessageAttachment;
-use App\Events\SocketMessage;
-use App\Http\Resources\MessageResource;
-use App\Models\Conversation;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-//imported idk if its correct
+use App\Models\User;
 
 
 class MessageController extends Controller

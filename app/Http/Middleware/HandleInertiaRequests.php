@@ -17,9 +17,7 @@ class HandleInertiaRequests extends Middleware
      */
     protected $rootView = 'app';
 
-    /**
-     * Determine the current asset version.
-     */
+
     public function version(Request $request): string|null
     {
         return parent::version($request);

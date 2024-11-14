@@ -1,12 +1,12 @@
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/common/inputs/InputError";
+import InputLabel from "@/Components/common/inputs/InputLabel";
+import PrimaryButton from "@/Components/common/buttons/PrimaryButton";
+import TextInput from "@/Components/common/inputs/TextInput";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
-import UserAvatar from "@/Components/App/UserAvatar";
+import UserAvatar from "@/Components/common/avatars/UserAvatar";
 
-export default function UpdateProfileInformation({
+export default function UpdateProfileInformationForm({
   mustVerifyEmail,
   status,
   className = "",
@@ -30,11 +30,11 @@ export default function UpdateProfileInformation({
   return (
     <section className={className}>
       <header>
-        <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 className="text-lg font-medium text-slate-900 dark:text-slate-100">
           Profile Information
         </h2>
 
-        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
           Update your account's profile information and email address.
         </p>
       </header>
@@ -78,11 +78,11 @@ export default function UpdateProfileInformation({
           <input
             type="file"
             id="avatar"
-            className="file-input border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300  rounded-md shadow-sm"
+            className="file-input border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300  rounded-md shadow-sm"
             onChange={(e) => setData("avatar", e.target.files[0])}
           />
           <div>
-            <small className="text-gray-400">
+            <small className="text-slate-400">
               Please upload square Picture. Ex: 512px&times;512px
             </small>
           </div>
@@ -91,13 +91,13 @@ export default function UpdateProfileInformation({
         </div>
         {mustVerifyEmail && user.email_verified_at === null && (
           <div>
-            <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
+            <p className="text-sm mt-2 text-slate-800 dark:text-slate-200">
               Your email address is unverified.
               <Link
                 href={route("verification.send")}
                 method="post"
                 as="button"
-                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                className="underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 dark:focus:ring-offset-slate-800"
               >
                 Click here to re-send the verification email.
               </Link>
@@ -121,7 +121,7 @@ export default function UpdateProfileInformation({
             leave="transition ease-in-out"
             leaveTo="opacity-0"
           >
-            <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Saved.</p>
           </Transition>
         </div>
       </form>
