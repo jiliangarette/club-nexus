@@ -35,26 +35,16 @@ class Group extends Model
     {
         return $this->belongsTo(Message::class, 'last_message_id');
     }
-    
-
-    // New relationship for likes
-    public function likes()
-    {
-        return $this->hasMany(Like::class, 'post_id'); // Assuming 'post_id' relates to a posts table
-    }
 
     public static function getGroupsForUser(User $user)
     {
         $query = self::select(['groups.*',
             'messages.message as last_message',
-            'messages.created_at as last_message_date',
-            'likes.created_at as last_like_date']) // Add last_like_date
+            'messages.created_at as last_message_date'])
             ->join('group_users', 'group_users.group_id', '=', 'groups.id')
             ->leftJoin('messages', 'messages.id', '=', 'groups.last_message_id')
-            ->leftJoin('likes', 'likes.post_id', '=', 'groups.id') // Join likes table
             ->where('group_users.user_id', $user->id)
             ->orderBy('messages.created_at', 'desc')
-            ->orderBy('likes.created_at', 'desc') // Order by likes
             ->orderBy('groups.name');
 
         return $query->get();
@@ -75,7 +65,7 @@ class Group extends Model
             'updated_at' => $this->updated_at,
             'last_message' => $this->last_message,
             'last_message_date' => $this->last_message_date ? ($this->last_message_date . ' UTC') : null,
-            'last_like_date' => $this->last_like_date ? ($this->last_like_date . ' UTC') : null, // Add last_like_date to response
+            'last_like_date' => $this->last_like_date ? ($this->last_like_date . ' UTC') : null, // Note
         ];
     }
 
@@ -87,5 +77,5 @@ class Group extends Model
         );
     }
 
-    
+
 }

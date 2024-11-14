@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import Checkbox from "@/Components/Checkbox";
-import GuestLayout from "@/Layouts/GuestLayout";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
+import Checkbox from "@/Components/common/inputs/Checkbox";
+import GuestLayout from "@/layout/GuestLayout";
+import InputError from "@/Components/common/inputs/InputError";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { Input } from "@/Components/ui/input";
+import { Button } from "@/Components/ui/button";
+import InputLabel from "@/Components/common/inputs/InputLabel";
 
 export default function Login({ status, canResetPassword, errorMessage }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -43,7 +43,7 @@ export default function Login({ status, canResetPassword, errorMessage }) {
         <div>
           <InputLabel htmlFor="email" value="Email" />
 
-          <TextInput
+          <Input
             id="email"
             type="email"
             name="email"
@@ -60,7 +60,7 @@ export default function Login({ status, canResetPassword, errorMessage }) {
         <div className="mt-4">
           <InputLabel htmlFor="password" value="Password" />
 
-          <TextInput
+          <Input
             id="password"
             type="password"
             name="password"
@@ -80,7 +80,7 @@ export default function Login({ status, canResetPassword, errorMessage }) {
               checked={data.remember}
               onChange={(e) => setData("remember", e.target.checked)}
             />
-            <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
+            <span className="ms-2 text-sm text-slate-600 dark:text-slate-400">
               Remember me
             </span>
           </label>
@@ -90,15 +90,15 @@ export default function Login({ status, canResetPassword, errorMessage }) {
           {canResetPassword && (
             <Link
               href={route("password.request")}
-              className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+              className="underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 dark:focus:ring-offset-slate-800"
             >
               Forgot your password?
             </Link>
           )}
 
-          <PrimaryButton className="ms-4 rounded-[7px]" disabled={processing}>
+          <Button className="ms-4 rounded-[7px]" disabled={processing}>
             Log in
-          </PrimaryButton>
+          </Button>
         </div>
       </form>
     </GuestLayout>
