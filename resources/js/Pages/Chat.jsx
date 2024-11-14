@@ -1,16 +1,15 @@
-import ChatLayout from "@/Layouts/ChatLayout";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
-import MessageItem from "@/Components/App/MessageItem";
-import ConversationHeader from "@/Components/App/ConversationHeader";
-import MessageInput from "@/Components/App/MessageInput";
 import { useEventBus } from "@/EventBus";
 import { route } from "ziggy-js";
 import axios from "axios";
-import AttachmentPreviewModal from "@/Components/App/AttachmentPreviewModal";
-import DefaultChatDisplay from "@/Components/App/DefaultChatDisplay";
-import PostCreationDrawer from "../Components/App/PostCreationDrawer";
+import DefaultChatDisplay from "@/Components/chat/DefaultChatDisplay";
+import ConversationHeader from "@/Components/chat/ConversationHeader";
+import MessageItem from "@/Components/chat/MessageItem";
+import MessageInput from "@/Components/chat/MessageInput";
+import AuthenticatedLayout from "@/layout/AuthenticatedLayout";
+import ChatLayout from "@/layout/ChatLayout";
+import AttachmentPreviewModal from "@/Components/common/modals/AttachmentPreviewModal";
+import { MessageCircleHeart, MessagesSquare } from "lucide-react";
 
 function Chat({ selectedConversation = null, messages = null }) {
   const [localMessages, setLocalMessages] = useState([]);
@@ -76,7 +75,6 @@ function Chat({ selectedConversation = null, messages = null }) {
       const scrollTop = messagesCtrRef.current.scrollTop;
       const clientHeight = messagesCtrRef.current.clientHeight;
       const tmpScrollFromBottom = scrollHeight - scrollTop - clientHeight;
-      console.log("tmpScrollFromBottom", tmpScrollFromBottom);
       setScrollFromBottom(scrollHeight - scrollTop - clientHeight);
 
       setLocalMessages((prevMessages) => {
@@ -146,8 +144,8 @@ function Chat({ selectedConversation = null, messages = null }) {
   }, [localMessages, noMoreMessages]);
   return (
     <>
-      <div className=" sm:p-5 w-full h-full">
-        <div className="w-full h-full bg-white shadow-sm rounded-lg overflow-hidden flex flex-col">
+      <div className="  sm:pr-5 w-full h-full">
+        <div className="w-full h-full bg-white shadow-md rounded-t-xl  overflow-hidden flex flex-col ">
           {!messages && (
             <div className="sm:flex flex-col gap-8 justify-center hidden items-center text-center h-full opacity-35">
               <DefaultChatDisplay />
@@ -159,8 +157,9 @@ function Chat({ selectedConversation = null, messages = null }) {
               <div ref={messagesCtrRef} className="flex-1 overflow-y-auto p-5">
                 {localMessages.length === 0 && (
                   <div className="flex justify-center items-center h-full">
-                    <div className="text-lg text-slate-200">
-                      No messages found
+                    <div className="text-3xl text-slate-400 flex flex-col place-items-center gap-4">
+                      <MessageCircleHeart size={80} strokeWidth={1} /> Start a
+                      conversation
                     </div>
                   </div>
                 )}
@@ -177,7 +176,9 @@ function Chat({ selectedConversation = null, messages = null }) {
                   </div>
                 )}
               </div>
-              <MessageInput conversation={selectedConversation} />
+              <div className="">
+                <MessageInput conversation={selectedConversation} />
+              </div>
             </>
           )}
           {previewAttachment.attachments && (
@@ -196,7 +197,7 @@ function Chat({ selectedConversation = null, messages = null }) {
 
 Chat.layout = (page) => {
   return (
-    <AuthenticatedLayout user={page.props.auth.user}>
+    <AuthenticatedLayout user={page.props.auth.user} classes="max-h-screen">
       <ChatLayout children={page} />
     </AuthenticatedLayout>
   );
