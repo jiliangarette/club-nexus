@@ -22,6 +22,9 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
     Route::get('/announcement',
         [AnnouncementController::class, 'announcement'])->name('announcement');
 
+    Route::post('/announcement',
+        [AnnouncementController::class, 'store'])->name('announcement.store');
+
     Route::get('chat/member/{user}',
         [MessageController::class, 'byUser'])->name('chat.user');
 
