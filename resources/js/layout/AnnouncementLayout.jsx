@@ -15,7 +15,7 @@ import {
   UsersRound,
 } from "lucide-react";
 
-const FeedLayout = ({ children }) => {
+const AnnouncementLayout = ({ children }) => {
   const page = usePage();
   const conversations = page.props.conversations || [];
   const [showGroupModal, setShowGroupModal] = useState(false);
@@ -64,39 +64,39 @@ const FeedLayout = ({ children }) => {
               </div>
               <div className="flex sm:flex-col gap-2 w-full sm:border-none border-b-[1px]">
                 <div className="ht  m-0 sm:px-2 pl-[6px] flex w-full">
-                  <NavigationButton
-                    className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
-                    active={true}
-                  >
-                    <House size={24} fill="black" />
-                    {wideSidebar ? (
-                      <span className="ml-2 text-nowrap sm:block hidden ">
-                        Club Feed
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </NavigationButton>
-                </div>
-
-                <div className=" py-[2px] sm:px-2 pl-[6px] flex w-full ">
                   <Link
-                    href={route("announcement")}
+                    href={route("feed")}
                     className="w-full sm:flex sm:justify-start"
                   >
                     <NavigationButton
                       className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
                     >
-                      <Megaphone size={24} className="text-slate-500" />
+                      <House size={24} />
                       {wideSidebar ? (
                         <span className="ml-2 text-nowrap sm:block hidden ">
-                          Announcement
+                          Club Feed
                         </span>
                       ) : (
                         ""
                       )}
                     </NavigationButton>
                   </Link>
+                </div>
+
+                <div className=" py-[2px] sm:px-2 pl-[6px] flex w-full ">
+                  <NavigationButton
+                    className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
+                    active={true}
+                  >
+                    <Megaphone size={24} fill="black" />
+                    {wideSidebar ? (
+                      <span className="ml-2 text-nowrap sm:block hidden ">
+                        Announcement
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </NavigationButton>
                 </div>
                 <div className=" py-[2px] sm:px-2 pl-[6px] flex w-full ">
                   <Link
@@ -117,77 +117,13 @@ const FeedLayout = ({ children }) => {
                     </NavigationButton>
                   </Link>
                 </div>
-                {user.is_admin && (
-                  <>
-                    <div className=" sm:px-2 pl-[6px] py-[2px] flex w-full">
-                      <NavigationButton
-                        onClick={() => setShowNewUserModal(true)}
-                        className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
-                      >
-                        <UserRoundPlus size={24} className="text-slate-500" />
-                        {wideSidebar ? (
-                          <span className="ml-2 text-nowrap sm:block hidden ">
-                            Create User
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </NavigationButton>
-                    </div>
-
-                    <div className=" sm:px-2 pl-[6px] py-[2px] flex w-full">
-                      <NavigationButton
-                        onClick={() => setShowGroupModal(true)}
-                        className="border-none  w-full justify-center sm:justify-start flex sm:w-fit "
-                      >
-                        <span className="relative">
-                          <UsersRound size={24} className="text-slate-500" />
-                          <Plus
-                            size={12}
-                            strokeWidth={4}
-                            className="text-slate-500 absolute -bottom-[2px] -right-[2px] p-[1px] bg-slate-50 rounded-full"
-                          />
-                        </span>
-                        {wideSidebar ? (
-                          <span className="ml-2 text-nowrap sm:w-fit sm:block hidden ">
-                            Create Club
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </NavigationButton>
-                    </div>
-                  </>
-                )}
               </div>
             </div>
             <div
               className={`sm:flex-1 flex sm:flex-col sm:my-4 sm:fixed top-[400px] left-0  ${
                 wideSidebar && "sm:w-[250px]"
               } `}
-            >
-              <div className="w-full hidden sm:block text-sm font-thin text-slate-400 pl-8 mt-3 h-8 p-2 pb-1 ">
-                {wideSidebar ? "Clubs" : ""}
-              </div>
-
-              <div className=" px-2 flex sm:flex-col gap-1 my-1 sm:my-0 sm:overflow-hidden hover:sm:overflow-y-scroll sm:overflow-x-hidden hover:overflow-x-scroll w-full sm:ml-2 sm:h-64">
-                {conversations
-                  .filter((conversation) => conversation.is_group)
-                  .map((conversation) => (
-                    <ClubFeedItem
-                      style={!wideSidebar && "absolute hidden "}
-                      key={`group_${conversation.id}`}
-                      club={conversation}
-                      margin={
-                        !wideSidebar
-                          ? "bg-none "
-                          : "bg-gradient-to-r from-slate-200 to-slate-300 "
-                      }
-                      width={!wideSidebar ? "sm:w-fit " : "sm:w-full"}
-                    />
-                  ))}
-              </div>
-            </div>
+            ></div>
           </div>
         </div>
         <NewUserModal
@@ -205,4 +141,4 @@ const FeedLayout = ({ children }) => {
   );
 };
 
-export default FeedLayout;
+export default AnnouncementLayout;
