@@ -1,5 +1,5 @@
 import { isAudio, isImage, isPDF, isPreviewable, isVideo } from "@/helper";
-import { FileDown, Paperclip, PlayCircle } from "lucide-react";
+import { ArrowDownToLine, FileDown, Paperclip, PlayCircle } from "lucide-react";
 
 function MessageAttachments({ attachments, attachmentClick }) {
   return (
@@ -16,7 +16,7 @@ function MessageAttachments({ attachments, attachmentClick }) {
                                     ? "w-84"
                                     : attachments.length < 2
                                     ? "w-60"
-                                    : "w-36"
+                                    : "w-40 h-40 object-cover bg-slate-100"
                                 }`}
             >
               {!isAudio(attachment) && (
@@ -24,23 +24,28 @@ function MessageAttachments({ attachments, attachmentClick }) {
                   onClick={(ev) => ev.stopPropagation()}
                   download
                   href={attachment.url}
-                  className="z-20 opacity-75 group-hover:opacity-100 transition-all h-8 w-8 flex items-center justify-center  rounded absolute right-0 top-0  cursor-pointer 0 opacity"
+                  className="z-20 opacity-75 hover:opacity-100 transition-all h-8 w-8 flex items-center justify-center  rounded absolute right-0 top-0  cursor-pointer 0 opacity"
                 >
-                  <FileDown size={15} className=" hover:text-slate-200" />
+                  <ArrowDownToLine
+                    size={24}
+                    className="text-slate-500 hover:text-slate-100 bg-slate-50 hover:bg-slate-400 p-1 rounded-lg"
+                  />
                 </a>
               )}
 
               {isImage(attachment) && (
                 <img
                   src={attachment.url}
-                  className="object-contain rounded-lg"
+                  className={`object-contain rounded-lg border ${
+                    attachments.length > 2 && "w-40 h-40 object-cover"
+                  } `}
                 />
               )}
               {isVideo(attachment) && (
-                <div className="relative flex justify-center items-center">
+                <div className="relative flex justify-center items-center group">
                   <PlayCircle
                     strokeWidth={1}
-                    className="z-20 absolute w-16 h-16 text-slate-200 opacity-70"
+                    className="z-20 absolute w-16 h-16 text-slate-200 opacity-70 group-hover:opacity-100"
                   />
                   <div className="absolute left-0 top-0 w-full h-full bg-black/50 z-10"></div>
                   <video src={attachment.url}></video>

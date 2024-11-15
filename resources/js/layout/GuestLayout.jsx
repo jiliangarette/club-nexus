@@ -1,7 +1,7 @@
 import ApplicationLogo from "@/Components/common/utilities/ApplicationLogo";
 import { Link } from "@inertiajs/react";
 
-export default function Guest({ children }) {
+export default function GuestLayout({ children }) {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0 bg-slate-50 dark:bg-slate-900">
       <div className="flex flex-col place-items-center">

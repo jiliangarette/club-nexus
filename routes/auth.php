@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -74,5 +75,8 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/post/group/{groupid}/posts',
       [PostController::class, 'index'])->name('post');
+
+    Route::get('/announcements',
+      [AnnouncementController::class, 'getAnnouncements'])->name('announcements');
 
 });

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import GuestLayout from "@/layoutuestLayout";
 import InputError from "@/Components/common/inputs/InputError";
 import InputLabel from "@/Components/common/inputs/InputLabel";
 import PrimaryButton from "@/Components/common/buttons/PrimaryButton";
 import TextInput from "@/Components/common/inputs/TextInput";
 import { Head, useForm } from "@inertiajs/react";
+import GuestLayout from "@/layout/GuestLayout";
 
 export default function ConfirmPassword() {
   const { data, setData, post, processing, errors, reset } = useForm({
