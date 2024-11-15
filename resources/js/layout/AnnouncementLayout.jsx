@@ -123,29 +123,7 @@ const AnnouncementLayout = ({ children }) => {
               className={`sm:flex-1 flex sm:flex-col sm:my-4 sm:fixed top-[400px] left-0  ${
                 wideSidebar && "sm:w-[250px]"
               } `}
-            >
-              <div className="w-full hidden sm:block text-sm font-thin text-slate-400 pl-8 mt-3 h-8 p-2 pb-1 ">
-                {wideSidebar ? "Clubs" : ""}
-              </div>
-
-              <div className=" px-2 flex sm:flex-col gap-1 my-1 sm:my-0 sm:overflow-hidden hover:sm:overflow-y-scroll sm:overflow-x-hidden hover:overflow-x-scroll w-full sm:ml-2 sm:h-64">
-                {conversations
-                  .filter((conversation) => conversation.is_group)
-                  .map((conversation) => (
-                    <ClubFeedItem
-                      style={!wideSidebar && "absolute hidden "}
-                      key={`group_${conversation.id}`}
-                      club={conversation}
-                      margin={
-                        !wideSidebar
-                          ? "bg-none "
-                          : "bg-gradient-to-r from-slate-200 to-slate-300 "
-                      }
-                      width={!wideSidebar ? "sm:w-fit " : "sm:w-full"}
-                    />
-                  ))}
-              </div>
-            </div>
+            ></div>
           </div>
         </div>
         <NewUserModal
