@@ -25,7 +25,7 @@ export default function PostItemCarousel({ images }) {
 
   return (
     <div
-      className="relative w-64 overflow-hidden"
+      className="relative w-64 overflow-hidden ml-16 "
       onTouchStart={(e) => (touchStartX.current = e.changedTouches[0].screenX)}
       onTouchEnd={(e) => {
         touchEndX.current = e.changedTouches[0].screenX;
@@ -34,7 +34,7 @@ export default function PostItemCarousel({ images }) {
     >
       {/* Carousel Image Container */}
       <div
-        className="flex transition-transform duration-500 ease-out"
+        className="flex transition-transform duration-500 ease-out "
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((src, index) => (
@@ -42,7 +42,7 @@ export default function PostItemCarousel({ images }) {
             key={index}
             src={`http://127.0.0.1:8000${src}`}
             alt={`Slide ${index + 1}`}
-            className="w-full flex-shrink-0"
+            className="w-full flex-shrink-0 rounded-lg"
           />
         ))}
       </div>
@@ -53,7 +53,7 @@ export default function PostItemCarousel({ images }) {
       </div>
 
       {/* Navigation Buttons - Only show on larger screens */}
-      <div className="absolute left-0 right-0 bottom-8 justify-between px-4 hidden sm:flex">
+      <div className="absolute left-0 right-0 bottom-8 justify-between px-4 hidden ">
         <button onClick={prevSlide} className="btn btn-circle">
           ❮
         </button>
