@@ -28,7 +28,7 @@ export default function NewMessageNotification({}) {
       {toasts.map((toast, index) => (
         <div
           key={toast.uuid}
-          className="alert alert-success py-3 px-4 text-slate-100 rounded-md"
+          className="alert bg-slate-100 py-3 px-4 border-slate-900 text-slate-900 rounded-md"
         >
           <Link
             href={
@@ -36,10 +36,12 @@ export default function NewMessageNotification({}) {
                 ? route("chat.group", toast.group_id)
                 : route("chat.user", toast.user.id)
             }
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis w-full"
           >
             <UserAvatar user={toast.user} />
-            <p>{toast.message}</p>
+            <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+              {toast.message}
+            </p>
           </Link>
         </div>
       ))}
