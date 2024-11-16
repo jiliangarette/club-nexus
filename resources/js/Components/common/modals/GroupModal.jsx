@@ -10,6 +10,7 @@ import { route } from "ziggy-js";
 import InputError from "../inputs/InputError";
 import TextInput from "../inputs/TextInput";
 import TextAreaInput from "../inputs/TextAreaInput";
+import { Button } from "@/Components/ui/button";
 
 export default function GroupModal({ show = false, onClose = () => {} }) {
   const page = usePage();
@@ -111,13 +112,16 @@ export default function GroupModal({ show = false, onClose = () => {} }) {
               )
             }
           />
+
           <InputError className="mt-2" message={errors.user_ids} />
         </div>
         <div className="mt-6 flex justify-end">
-          <SecondaryButton onClick={closeModal}>cancel</SecondaryButton>
-          <PrimaryButton className="ms-3" disabled={processing} type="submit">
+          <Button variant="secondary" onClick={closeModal}>
+            cancel
+          </Button>
+          <Button className="ms-3" disabled={processing} type="submit">
             {group.id ? "Update" : "Create"}
-          </PrimaryButton>
+          </Button>
         </div>
       </form>
     </Modal>
