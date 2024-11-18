@@ -118,126 +118,130 @@ export function PostCreationDrawer({ feed = null, onPostData }) {
         </IconButton>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Create Post</DrawerTitle>
-          <DrawerDescription>
-            Share your thoughts with your club members!
-          </DrawerDescription>
-        </DrawerHeader>
+        <div className="flex flex-col px-4 sm:w-2/3 mx-auto">
+          <DrawerHeader>
+            <DrawerTitle>Create Post</DrawerTitle>
+            <DrawerDescription>
+              Share your thoughts with your club members!
+            </DrawerDescription>
+          </DrawerHeader>
 
-        <div className="border">
-          <NewPostInput
-            rows="7"
-            value={newPost}
-            onSend={onSendClick}
-            onChange={(ev) => setNewPost(ev.target.value)}
-          />
-        </div>
-        <div className="flex justify-between mt-4">
-          <div className="flex space-x-2">
-            <button
-              aria-label="Add Photo"
-              className="p-2 rounded hover:bg-slate-100 relative"
-            >
-              <Image className="h-5 w-5 text-slate-600" />
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={onFileChange}
-                className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
-              />
-            </button>
-            <button
-              aria-label="Attach File"
-              className="p-2 rounded hover:bg-slate-100 relative"
-            >
-              <Paperclip className="h-5 w-5 text-slate-600" />
-              <input
-                type="file"
-                onChange={onFileChange}
-                className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
-              />
-            </button>
-            <button
-              aria-label="Bold"
-              className="p-2 rounded hover:bg-slate-100"
-            >
-              <Bold className="h-5 w-5 text-slate-600" />
-            </button>
-            <button
-              aria-label="Italic"
-              className="p-2 rounded hover:bg-slate-100"
-            >
-              <Italic className="h-5 w-5 text-slate-600" />
-            </button>
-            <button
-              aria-label="List"
-              className="p-2 rounded hover:bg-slate-100"
-            >
-              <List className="h-5 w-5 text-slate-600" />
-            </button>
-            <button
-              aria-label="Code Block"
-              className="p-2 rounded hover:bg-slate-100"
-            >
-              <Code className="h-5 w-5 text-slate-600" />
-            </button>
+          <div className="border rounded-lg">
+            <NewPostInput
+              rows="7"
+              value={newPost}
+              onSend={onSendClick}
+              onChange={(ev) => setNewPost(ev.target.value)}
+            />
           </div>
-        </div>
-        <DrawerFooter className="flex justify-between mt-4 pb-4 px-2">
-          <DrawerClose asChild>
-            <Button variant="secondary">Cancel</Button>
-          </DrawerClose>
-          {!!uploadProgress && (
-            <progress
-              className="progress progress-info w-full"
-              value={uploadProgress}
-              max="100"
-            ></progress>
-          )}
-          {inputErrorPost && (
-            <span className="text-xs text-red-400">{inputErrorPost}</span>
-          )}
-
-          <div className="flex flex-wrap gap-1 mt-2">
-            {chosenFiles.map((file) => (
-              <div
-                key={file.file.name}
-                className={
-                  `relative flex justify-between cursor-pointer` +
-                  (!isImage(file.file) ? "w-[240px]" : "")
-                }
+          <div className="flex justify-between mt-4">
+            <div className="flex space-x-2">
+              <button
+                aria-label="Add Photo"
+                className="p-2 rounded hover:bg-slate-100 relative"
               >
-                {isImage(file.file) && (
-                  <img
-                    src={file.url}
-                    alt=""
-                    className="w-16 h-16 object-cover"
-                  />
-                )}
-                {!isImage(file.file) && <AttachmentPreview file={file} />}
-
-                <button
-                  onClick={() =>
-                    setChosenFiles(
-                      chosenFiles.filter((f) => f.file.name !== file.file.name)
-                    )
-                  }
-                  className="absolute w-6 h-6 rounded-full bg-slate-800 -right-2 -top-2 text-slate-300 hover:text-slate-100 z-10"
-                >
-                  <XCircleIcon className="w-6" />
-                </button>
-              </div>
-            ))}
+                <Image className="h-5 w-5 text-slate-600" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={onFileChange}
+                  className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
+                />
+              </button>
+              <button
+                aria-label="Attach File"
+                className="p-2 rounded hover:bg-slate-100 relative"
+              >
+                <Paperclip className="h-5 w-5 text-slate-600" />
+                <input
+                  type="file"
+                  onChange={onFileChange}
+                  className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
+                />
+              </button>
+              <button
+                aria-label="Bold"
+                className="p-2 rounded hover:bg-slate-100"
+              >
+                <Bold className="h-5 w-5 text-slate-600" />
+              </button>
+              <button
+                aria-label="Italic"
+                className="p-2 rounded hover:bg-slate-100"
+              >
+                <Italic className="h-5 w-5 text-slate-600" />
+              </button>
+              <button
+                aria-label="List"
+                className="p-2 rounded hover:bg-slate-100"
+              >
+                <List className="h-5 w-5 text-slate-600" />
+              </button>
+              <button
+                aria-label="Code Block"
+                className="p-2 rounded hover:bg-slate-100"
+              >
+                <Code className="h-5 w-5 text-slate-600" />
+              </button>
+            </div>
           </div>
+          <DrawerFooter className="flex justify-between mt-4 pb-4 px-2">
+            <DrawerClose asChild>
+              <Button variant="secondary">Cancel</Button>
+            </DrawerClose>
+            {!!uploadProgress && (
+              <progress
+                className="progress progress-info w-full"
+                value={uploadProgress}
+                max="100"
+              ></progress>
+            )}
+            {inputErrorPost && (
+              <span className="text-xs text-red-400">{inputErrorPost}</span>
+            )}
 
-          <DrawerClose asChild>
-            <Button onClick={onSendClick} disabled={postSending}>
-              Post
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
+            <div className="flex flex-wrap gap-1 mt-2">
+              {chosenFiles.map((file) => (
+                <div
+                  key={file.file.name}
+                  className={
+                    `relative flex justify-between cursor-pointer` +
+                    (!isImage(file.file) ? "w-[240px]" : "")
+                  }
+                >
+                  {isImage(file.file) && (
+                    <img
+                      src={file.url}
+                      alt=""
+                      className="w-16 h-16 object-cover"
+                    />
+                  )}
+                  {!isImage(file.file) && <AttachmentPreview file={file} />}
+
+                  <button
+                    onClick={() =>
+                      setChosenFiles(
+                        chosenFiles.filter(
+                          (f) => f.file.name !== file.file.name
+                        )
+                      )
+                    }
+                    className="absolute w-6 h-6 rounded-full bg-slate-800 -right-2 -top-2 text-slate-300 hover:text-slate-100 z-10"
+                  >
+                    <XCircleIcon className="w-6" />
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <DrawerClose asChild>
+              <Button onClick={onSendClick} disabled={postSending}>
+                Post
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </div>
       </DrawerContent>
     </Drawer>
   );
