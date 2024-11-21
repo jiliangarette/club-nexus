@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
 
-  // Route::get('/',
-  //   [LandingPageController::class, 'landingPage'])->name('landing-page');
+  Route::get('/landing-page',
+    [LandingPageController::class, 'landingPage'])->name('landing-page');
+
 
   Route::get('register',
     [RegisteredUserController::class, 'create'])->name('register');

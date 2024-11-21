@@ -109,18 +109,15 @@ const ConversationHeader = ({ selectedConversation }) => {
               <>
                 {selectedConversation.owner_id === authUser.id && (
                   <>
-                    <IconButton>
-                      <GroupDescriptionPopover
-                        description={selectedConversation.description}
-                        size={20}
-                      />
-                    </IconButton>
-                    <IconButton>
-                      <GroupUsersPopover
-                        users={selectedConversation.users}
-                        size={20}
-                      />
-                    </IconButton>
+                    <GroupDescriptionPopover
+                      description={selectedConversation.description}
+                      size={20}
+                    />
+
+                    <GroupUsersPopover
+                      users={selectedConversation.users}
+                      size={20}
+                    />
                     <IconButton
                       onClick={() =>
                         emit("GroupModal.show", selectedConversation)

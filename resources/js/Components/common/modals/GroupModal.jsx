@@ -47,7 +47,6 @@ export default function GroupModal({ show = false, onClose = () => {} }) {
   };
 
   const closeModal = () => {
-    reset();
     onClose();
   };
 
@@ -68,7 +67,7 @@ export default function GroupModal({ show = false, onClose = () => {} }) {
     <Modal show={show} onClose={closeModal}>
       <form onSubmit={createOrUpdateGroup} className="p-6 overflow-y-auto">
         <h2 className="text-xl font-medium text-slate-900 dark:text-slate-100">
-          {group.id ? `Edit Club "${group.name}"` : "Create new Group"}
+          {group.id ? `Edit "${group.name}"` : "Create new Club."}
         </h2>
 
         <div className="mt-8">

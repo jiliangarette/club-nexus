@@ -51,7 +51,7 @@ const NewMessageInput = ({
       onChange={onChangeEvent}
       onFocus={onFocus}
       onBlur={onBlur}
-      className="w-full resize-none overflow-y-auto max-h-40 bg-slate-200 sm:bg-transparent border-none outline-none focus:outline-none focus:border-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 sm:text-lg text-[15px] rounded-lg h-full mx-1 sm:mx-0"
+      className="w-full resize-none overflow-y-auto max-h-40 bg-slate-200 sm:bg-transparent border-none outline-none focus:outline-none focus:border-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 sm:text-lg text-[15px] rounded-lg sm:h-full mx-1 sm:mx-0 h-fit"
     />
   );
 };

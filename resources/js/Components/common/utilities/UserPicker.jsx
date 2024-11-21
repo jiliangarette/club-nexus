@@ -29,9 +29,9 @@ export default function UserPicker({ value, options, onSelect }) {
             <Combobox.Input
               className="border-slate-300  focus:border-slate-500  focus:ring-slate-500 rounded-sm shadow-sm mt-1 block w-full"
               displayValue={(persons) =>
-                persons.length ? `${persons.length} users selected` : ""
+                persons.length ? `${persons.length} members selected` : ""
               }
-              placeholder="Select users ..."
+              placeholder="Select members ..."
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
