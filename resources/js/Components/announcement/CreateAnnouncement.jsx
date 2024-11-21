@@ -20,6 +20,7 @@ import InputLabel from "../common/inputs/InputLabel";
 
 export function CreateAnnouncement() {
   const page = usePage();
+  const currentUser = page.props.auth.user;
   const conversations = page.props.conversations || [];
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -91,16 +92,18 @@ export function CreateAnnouncement() {
     <Drawer>
       <DrawerTrigger asChild>
         <IconButton
-          className="tooltip tooltip-left bg-slate-900"
+          className={`tooltip tooltip-left bg-slate-900 ${
+            currentUser.is_admin ? "" : "hidden"
+          }`}
           data-tip="Create an Announcement"
         >
           <Plus className="h-7 w-7 text-slate-50" />
         </IconButton>
       </DrawerTrigger>
       <DrawerContent>
-        <div className="w-full sm:w-1/2 mx-auto sm:px-4">
+        <div className="w-full sm:w-1/2 mx-auto px-4">
           <DrawerHeader>
-            <DrawerTitle>Post New Announcement</DrawerTitle>
+            <DrawerTitle>Create Announcement</DrawerTitle>
           </DrawerHeader>
 
           <div className="space-y-3">
@@ -141,6 +144,7 @@ export function CreateAnnouncement() {
               <Input
                 type="text"
                 placeholder="Enter the title here"
+                className="h-12"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -168,9 +172,12 @@ export function CreateAnnouncement() {
             </div>
           </div>
 
-          <div className="flex justify-between mt-4">
-            <div className="flex space-x-2">
-              <button aria-label="Add Banner Image" className="p-2 relative">
+          <div className="flex justify-between mt-4 w-full">
+            <div className="flex space-x-2 w-full">
+              <Button
+                className="p-2 relative sm:w-fit w-full h-12"
+                variant="secondary"
+              >
                 <input
                   type="file"
                   accept="image/*"
@@ -178,10 +185,10 @@ export function CreateAnnouncement() {
                   onChange={onFileChange}
                   className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
                 />
-                <Button variant="secondary" className="p-3 rounded-md text-sm">
+                <div className="p-3 rounded-md text-sm flex gap-2">
                   Add Image <ImagePlus />
-                </Button>
-              </button>
+                </div>
+              </Button>
             </div>
           </div>
 
