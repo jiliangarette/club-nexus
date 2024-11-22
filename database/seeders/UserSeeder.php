@@ -15,53 +15,48 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Jilian Garette A. Abangan',
             'email' => 'jiliangarette@gmail.com',
-            'avatar' => 'avatars/jilian.png',
+            'avatar' => 'avatars/jilian.jpg',
             'password' => bcrypt('password'),
             'is_admin' => true,
         ]);
         User::factory()->create([
-            'name' => 'Thomas Shelby',
-            'email' => 'peakyblinders@gmail.com',
-            'avatar' => 'avatars/shelby.jpg',
+            'name' => 'John Doe',
+            'email' => 'john@gmail.com',
+            'avatar' => 'avatars/avatar1.png',
             'password' => bcrypt('password'),
         ]);
         User::factory()->create([
             'name' => 'Robert C. Martin',
             'email' => 'cleancode@gmail.com',
-            'avatar' => 'avatars/bob.jfif',
+            'avatar' => 'avatars/avatar2.png',
             'password' => bcrypt('password'),
             'is_admin' => true,
         ]);
         User::factory()->create([
-            'name' => 'Taylor Swift',
-            'email' => 'enchanted@gmail.com',
-            'avatar' => 'avatars/taylor.jpg',
+            'name' => 'Jane Smith',
+            'email' => 'jane@gmail.com',
+            'avatar' => 'avatars/avatar3.png',
             'password' => bcrypt('password'),
         ]);
         User::factory()->create([
-            'name' => 'Elon Musk',
-            'email' => 'tesla@gmail.com',
-            'avatar' => 'avatars/cyber.jpg',
+            'name' => 'Michael Lee',
+            'email' => 'michael@gmail.com',
+            'avatar' => 'avatars/avatar4.png',
             'password' => bcrypt('password'),
             'is_admin' => true,
         ]);
         User::factory()->create([
-            'name' => 'Mark Zuckerberg',
-            'email' => 'facebook@gmail.com',
-            'avatar' => 'avatars/thread.jpg',
+            'name' => 'Sarah Brown',
+            'email' => 'sarah@gmail.com',
+            'avatar' => 'avatars/avatar5.png',
             'password' => bcrypt('password'),
         ]);
         User::factory()->create([
-            'name' => 'Walter White',
-            'email' => 'heisenberg@gmail.com',
-            'avatar' => 'avatars/walter.jpg',
+            'name' => 'Chris Wilson',
+            'email' => 'chris@gmail.com',
+            'avatar' => 'avatars/avatar6.png',
             'password' => bcrypt('password'),
         ]);
-        User::factory()->create([
-            'name' => 'Ragnar Lothbrok',
-            'email' => 'ragnar@gmail.com',
-            'avatar' => 'avatars/ragnar.jpg',
-            'password' => bcrypt('password'),
-        ]);
+
     }
 }

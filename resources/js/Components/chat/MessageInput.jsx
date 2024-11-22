@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import IconButton from "../common/buttons/IconButton";
 import useScreenSize from "@/use-screensize";
+import { Progress } from "../ui/progress";
 
 const MessageInput = ({ conversation = null }) => {
   const { isDesktop, isMobile, isTablet } = useScreenSize();
@@ -146,12 +147,12 @@ const MessageInput = ({ conversation = null }) => {
   return (
     <div className="flex flex-wrap items-start sm:border-t sm:border-slate-300 sm:p-4 p-2">
       <div className="flex flex-col w-full bg-transparent sm:bg-slate-100 rounded-lg justify-center sm:p-2">
-        {!!uploadProgress && (
-          <progress
-            className="progress progress-info w-full"
-            value={uploadProgress}
-            max="100"
-          ></progress>
+        {!!uploadProgress ? (
+          <div className="flex justify-center">
+            <Progress value={uploadProgress} className="w-[60%]" />
+          </div>
+        ) : (
+          <div className=" h-2 w-full"></div>
         )}
         {inputErrorMessage && (
           <span className="text-xs text-red-400">{inputErrorMessage}</span>
@@ -302,9 +303,9 @@ const MessageInput = ({ conversation = null }) => {
                 className="bg-slate-800 text-slate-100 rounded-lg"
               >
                 {messageSending ? (
-                  <Loading size="sm" />
+                  <Loading size="md" />
                 ) : (
-                  <ArrowUp strokeWidth={2} />
+                  <ArrowUp strokeWidth={2} className="text-slate-100" />
                 )}
               </IconButton>
             ) : (

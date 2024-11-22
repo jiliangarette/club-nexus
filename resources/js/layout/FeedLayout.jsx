@@ -58,14 +58,16 @@ const FeedLayout = ({ children }) => {
                     `}
         >
           <div className="flex flex-col ">
-            <div className=" rounded-lg hideen sm:block sm:flex-col flex sm:px-2  sm:my-6 sm:fixed left-0 top-20 sm:place-items-start sm:w-[250px] ">
+            <div className=" rounded-lg hideen sm:block sm:flex-col flex sm:px-2  sm:my-6 sm:fixed left-0 top-20 sm:place-items-start sm:w-[250px] px-1">
               <div className=" w-full hidden sm:block text-sm font-thin text-slate-400 pl-8 mt-3 h-8 p-2 ">
                 {wideSidebar ? "Shortcuts" : ""}
               </div>
-              <div className="flex sm:flex-col gap-2 w-full sm:border-none border-b-[1px]">
-                <div className="ht  m-0 sm:px-2 pl-[6px] flex w-full">
+              <div className="flex sm:flex-col sm:gap-2 gap-1 w-full sm:border-none border-b-[1px]">
+                <div className="ht  m-0 sm:px-2 sm:pl-[6px] flex w-full">
                   <NavigationButton
-                    className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
+                    className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex ${
+                      !user.is_admin && "bg-slate-200 sm:bg-transparent"
+                    }`}
                     active={true}
                   >
                     <House size={24} fill="black" />
@@ -79,27 +81,36 @@ const FeedLayout = ({ children }) => {
                   </NavigationButton>
                 </div>
 
-                <div className=" py-[2px] sm:px-2 pl-[6px] flex w-full ">
-                  <NavigationButton
-                    className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
+                <div className=" py-[2px] sm:px-2 sm:pl-[6px] flex w-full ">
+                  <Link
+                    href={route("announcement")}
+                    className="w-full sm:flex sm:justify-start"
                   >
-                    <Megaphone size={24} className="text-slate-500" />
-                    {wideSidebar ? (
-                      <span className="ml-2 text-nowrap sm:block hidden ">
-                        Announcement
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </NavigationButton>
+                    <NavigationButton
+                      className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex ${
+                        !user.is_admin && "bg-slate-200 sm:bg-transparent"
+                      }`}
+                    >
+                      <Megaphone size={24} className="text-slate-500" />
+                      {wideSidebar ? (
+                        <span className="ml-2 text-nowrap sm:block hidden ">
+                          Announcement
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </NavigationButton>
+                  </Link>
                 </div>
-                <div className=" py-[2px] sm:px-2 pl-[6px] flex w-full ">
+                <div className=" py-[2px] sm:px-2 sm:pl-[6px] flex w-full ">
                   <Link
                     href={route("chat")}
                     className="w-full sm:flex sm:justify-start"
                   >
                     <NavigationButton
-                      className={`border-none w-full sm:w-fit justify-center sm:justify-start flex`}
+                      className={`border-none w-full sm:w-fit justify-center sm:justify-start flex ${
+                        !user.is_admin && "bg-slate-200 sm:bg-transparent"
+                      }`}
                     >
                       <MessageCircle size={24} className="text-slate-500" />
                       {wideSidebar ? (
@@ -114,7 +125,7 @@ const FeedLayout = ({ children }) => {
                 </div>
                 {user.is_admin && (
                   <>
-                    <div className=" sm:px-2 pl-[6px] py-[2px] flex w-full">
+                    <div className=" sm:px-2 sm:pl-[6px] py-[2px] flex w-full">
                       <NavigationButton
                         onClick={() => setShowNewUserModal(true)}
                         className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
@@ -130,7 +141,7 @@ const FeedLayout = ({ children }) => {
                       </NavigationButton>
                     </div>
 
-                    <div className=" sm:px-2 pl-[6px] py-[2px] flex w-full">
+                    <div className=" sm:px-2 sm:pl-[6px] py-[2px] flex w-full">
                       <NavigationButton
                         onClick={() => setShowGroupModal(true)}
                         className="border-none  w-full justify-center sm:justify-start flex sm:w-fit "

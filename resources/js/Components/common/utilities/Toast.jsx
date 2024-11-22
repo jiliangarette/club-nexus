@@ -23,7 +23,7 @@ export default function Toast({}) {
   }, [on]);
 
   return (
-    <div className="toast min-w-[280px]">
+    <div className={`toast min-w-[280px] ${!toasts[0] && "h-[1px] py-0"}`}>
       {toasts.map((toast, index) => (
         <Alert
           key={index}

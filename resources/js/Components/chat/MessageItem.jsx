@@ -27,20 +27,24 @@ const MessageItem = ({ message, attachmentClick }) => {
       <div
         className={
           "chat-bubble relative " +
-          (message.sender_id === currentUser.id
-            ? "bg-gradient-to-r from-slate-600  via-slate-400 to-slate-500  text-slate-100"
+          (message.message === null
+            ? "bg-transparent  "
+            : message.sender_id === currentUser.id
+            ? "bg-gradient-to-r from-slate-600 via-slate-500 to-slate-600 text-slate-100"
             : "bg-slate-100 text-slate-800")
         }
       >
-        {message.sender_id == currentUser.id && (
+        {message.sender_id === currentUser.id && message.message !== null && (
           <MessageOptionsDropdown message={message} />
         )}
         <div className="chat-message">
-          <div className="chat-message-content">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {message.message}
-            </ReactMarkdown>
-          </div>
+          {message.message && (
+            <div className="chat-message-content">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {message.message}
+              </ReactMarkdown>
+            </div>
+          )}
           <MessageAttachments
             attachments={message.attachments}
             attachmentClick={attachmentClick}

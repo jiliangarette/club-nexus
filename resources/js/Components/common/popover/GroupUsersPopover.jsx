@@ -13,7 +13,7 @@ export default function GroupUsersPopover({ users = [], text, size }) {
           <Popover.Button
             className={`${
               open ? " text-black font-semibold" : "text-slate-900"
-            } hover:text-slate-800 flex place-items-center gap-2 outline-none`}
+            } hover:text-slate-800 flex place-items-center gap-2 outline-none sm:mx-1`}
           >
             <UsersRound size={size} />
             {text}

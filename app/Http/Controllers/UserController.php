@@ -33,6 +33,7 @@ class UserController extends Controller
     }
 
 
+
     public function changeRole(User $user)
     {
       $user->update(['is_admin' => !(bool) $user->is_admin]);

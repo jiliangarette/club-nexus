@@ -10,6 +10,7 @@ import { route } from "ziggy-js";
 import InputError from "../inputs/InputError";
 import TextInput from "../inputs/TextInput";
 import TextAreaInput from "../inputs/TextAreaInput";
+import { Button } from "@/Components/ui/button";
 
 export default function GroupModal({ show = false, onClose = () => {} }) {
   const page = usePage();
@@ -46,7 +47,6 @@ export default function GroupModal({ show = false, onClose = () => {} }) {
   };
 
   const closeModal = () => {
-    reset();
     onClose();
   };
 
@@ -67,7 +67,7 @@ export default function GroupModal({ show = false, onClose = () => {} }) {
     <Modal show={show} onClose={closeModal}>
       <form onSubmit={createOrUpdateGroup} className="p-6 overflow-y-auto">
         <h2 className="text-xl font-medium text-slate-900 dark:text-slate-100">
-          {group.id ? `Edit Club "${group.name}"` : "Create new Group"}
+          {group.id ? `Edit "${group.name}"` : "Create new Club."}
         </h2>
 
         <div className="mt-8">
@@ -111,13 +111,16 @@ export default function GroupModal({ show = false, onClose = () => {} }) {
               )
             }
           />
+
           <InputError className="mt-2" message={errors.user_ids} />
         </div>
         <div className="mt-6 flex justify-end">
-          <SecondaryButton onClick={closeModal}>cancel</SecondaryButton>
-          <PrimaryButton className="ms-3" disabled={processing} type="submit">
+          <Button variant="secondary" onClick={closeModal}>
+            cancel
+          </Button>
+          <Button className="ms-3" disabled={processing} type="submit">
             {group.id ? "Update" : "Create"}
-          </PrimaryButton>
+          </Button>
         </div>
       </form>
     </Modal>

@@ -21,7 +21,7 @@ export default function PostItem({
   username,
   content,
   createdAt,
-  initialLikes = 0, 
+  initialLikes = 0,
   isAdmin,
   avatar,
   carousel,
@@ -67,7 +67,7 @@ export default function PostItem({
   };
 
   return (
-    <Card className="w-full flex-wrap border-none mb-[1px] rounded-none hover:bg-slate-50">
+    <Card className="w-full flex-wrap border-none mb-[1px] rounded-none hover:bg-slate-50 ">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 flex-1">

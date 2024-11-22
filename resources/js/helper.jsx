@@ -25,6 +25,8 @@ export const formatMessageDateLong = (date) => {
     }
 };
 
+
+
 export const formatMessageDateShort = (date) => {
     const now = new Date();
     const inputDate = new Date(date);

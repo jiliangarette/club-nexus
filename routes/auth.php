@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -16,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
 
-  // Route::get('/',
-  //   [LandingPageController::class, 'landingPage'])->name('landing-page');
+  Route::get('/landing-page',
+    [LandingPageController::class, 'landingPage'])->name('landing-page');
+
 
   Route::get('register',
     [RegisteredUserController::class, 'create'])->name('register');
@@ -74,5 +76,8 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/post/group/{groupid}/posts',
       [PostController::class, 'index'])->name('post');
+
+    Route::get('/announcements',
+      [AnnouncementController::class, 'getAnnouncements'])->name('announcements');
 
 });
