@@ -123,48 +123,49 @@ const FeedLayout = ({ children }) => {
                     </NavigationButton>
                   </Link>
                 </div>
-                {user.is_admin && (
-                  <>
-                    <div className=" sm:px-2 sm:pl-[6px] py-[2px] flex w-full">
-                      <NavigationButton
-                        onClick={() => setShowNewUserModal(true)}
-                        className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
-                      >
-                        <UserRoundPlus size={24} className="text-slate-500" />
-                        {wideSidebar ? (
-                          <span className="ml-2 text-nowrap sm:block hidden ">
-                            Create User
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </NavigationButton>
-                    </div>
+                {user.is_admin ||
+                  (user.is_moderator && (
+                    <>
+                      <div className=" sm:px-2 sm:pl-[6px] py-[2px] flex w-full">
+                        <NavigationButton
+                          onClick={() => setShowNewUserModal(true)}
+                          className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
+                        >
+                          <UserRoundPlus size={24} className="text-slate-500" />
+                          {wideSidebar ? (
+                            <span className="ml-2 text-nowrap sm:block hidden ">
+                              Create User
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </NavigationButton>
+                      </div>
 
-                    <div className=" sm:px-2 sm:pl-[6px] py-[2px] flex w-full">
-                      <NavigationButton
-                        onClick={() => setShowGroupModal(true)}
-                        className="border-none  w-full justify-center sm:justify-start flex sm:w-fit "
-                      >
-                        <span className="relative">
-                          <UsersRound size={24} className="text-slate-500" />
-                          <Plus
-                            size={12}
-                            strokeWidth={4}
-                            className="text-slate-500 absolute -bottom-[2px] -right-[2px] p-[1px] bg-slate-50 rounded-full"
-                          />
-                        </span>
-                        {wideSidebar ? (
-                          <span className="ml-2 text-nowrap sm:w-fit sm:block hidden ">
-                            Create Club
+                      <div className=" sm:px-2 sm:pl-[6px] py-[2px] flex w-full">
+                        <NavigationButton
+                          onClick={() => setShowGroupModal(true)}
+                          className="border-none  w-full justify-center sm:justify-start flex sm:w-fit "
+                        >
+                          <span className="relative">
+                            <UsersRound size={24} className="text-slate-500" />
+                            <Plus
+                              size={12}
+                              strokeWidth={4}
+                              className="text-slate-500 absolute -bottom-[2px] -right-[2px] p-[1px] bg-slate-50 rounded-full"
+                            />
                           </span>
-                        ) : (
-                          ""
-                        )}
-                      </NavigationButton>
-                    </div>
-                  </>
-                )}
+                          {wideSidebar ? (
+                            <span className="ml-2 text-nowrap sm:w-fit sm:block hidden ">
+                              Create Club
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </NavigationButton>
+                      </div>
+                    </>
+                  ))}
               </div>
             </div>
             <div

@@ -170,6 +170,7 @@ const ChatLayout = ({ children }) => {
     setIsFocus(true);
   };
 
+  //hide the users
   const handleBlur = () => {
     setTimeout(() => {
       setIsFocus(false);
@@ -247,41 +248,42 @@ const ChatLayout = ({ children }) => {
                   </NavigationButton>
                 </Link>
               </div>
-              {user.is_admin && (
-                <>
-                  <div className=" sm:px-2 pl-[6px] sm:py-[2px] flex w-full">
-                    <NavigationButton
-                      onClick={() => setShowNewUserModal(true)}
-                      className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
-                    >
-                      <UserRoundPlus size={24} className="text-slate-500" />
-                      {wideSidebar ? (
-                        <span className="ml-2 text-nowrap sm:block hidden ">
-                          Create User
-                        </span>
-                      ) : (
-                        ""
-                      )}
-                    </NavigationButton>
-                  </div>
+              {user.is_admin ||
+                (user.is_moderator && (
+                  <>
+                    <div className=" sm:px-2 pl-[6px] sm:py-[2px] flex w-full">
+                      <NavigationButton
+                        onClick={() => setShowNewUserModal(true)}
+                        className={`border-none  w-full sm:w-fit justify-center sm:justify-start flex`}
+                      >
+                        <UserRoundPlus size={24} className="text-slate-500" />
+                        {wideSidebar ? (
+                          <span className="ml-2 text-nowrap sm:block hidden ">
+                            Create User
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </NavigationButton>
+                    </div>
 
-                  <div className=" sm:px-2 pl-[6px] sm:py-[2px] flex w-full">
-                    <NavigationButton
-                      onClick={() => setShowGroupModal(true)}
-                      className={`border-none  w-fit justify-center sm:justify-start flex`}
-                    >
-                      <UsersRound size={24} className="text-slate-500" />
-                      {wideSidebar ? (
-                        <span className="ml-2 text-nowrap sm:w-fit sm:block hidden ">
-                          Create Club
-                        </span>
-                      ) : (
-                        ""
-                      )}
-                    </NavigationButton>
-                  </div>
-                </>
-              )}
+                    <div className=" sm:px-2 pl-[6px] sm:py-[2px] flex w-full">
+                      <NavigationButton
+                        onClick={() => setShowGroupModal(true)}
+                        className={`border-none  w-fit justify-center sm:justify-start flex`}
+                      >
+                        <UsersRound size={24} className="text-slate-500" />
+                        {wideSidebar ? (
+                          <span className="ml-2 text-nowrap sm:w-fit sm:block hidden ">
+                            Create Club
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </NavigationButton>
+                    </div>
+                  </>
+                ))}
             </div>
           </div>
           <div className="w-full hidden sm:block text-sm font-thin text-slate-400 pl-8 mt-3 h-8 p-2 pb-1 ">
@@ -295,7 +297,7 @@ const ChatLayout = ({ children }) => {
                   type="search"
                   onKeyUp={onSearch}
                   onFocus={handleFocus}
-                  onBlur={handleBlur}
+                  // onBlur={handleBlur}
                   id="search"
                   placeholder="Search..."
                   className="pl-10 pr-4 py-2 w-full rounded-md border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-primary focus:border-transparent"

@@ -121,6 +121,7 @@ function Home() {
             postUserId={postData.data.user_id}
             likes={0}
             isAdmin={postData.data.user.is_admin}
+            isModerator={postData.data.user.moderator}
             avatar={<UserAvatar user={postData.data.user} />}
             carousel={
               postData.data.attachments.length > 0 &&
@@ -144,6 +145,7 @@ function Home() {
             createdAt={post.created_at}
             likes={post.likes || 0}
             isAdmin={post.user.is_admin}
+            isModerator={post.user.is_moderator}
             postUserId={post.user_id}
             avatar={<UserAvatar user={post.user} />}
             carousel={

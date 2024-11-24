@@ -55,16 +55,17 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
     Route::delete('/group/{group}',
         [GroupController::class, 'destroy'])->name('group.destroy');
 
-    Route::middleware(['admin'])->group(function() {
-        Route::post('/user',
-            [UserController::class, 'store'])->name('user.store');
+   Route::middleware(['admin'])->group(function () {
+    Route::post('/user', [UserController::class, 'store'])->name('user.store');
 
-        Route::post('/user/change-role/{user}',
-            [UserController::class, 'changeRole'])->name('user.changeRole');
+    Route::post('/user/change-role/{user}', [UserController::class, 'changeRole'])->name('user.changeRole');
 
-        Route::post('/user/block-unblock/{user}',
-            [UserController::class, 'blockUnblock'])->name('user.blockUnblock');
-    });
+    Route::post('/user/block-unblock/{user}', [UserController::class, 'blockUnblock'])->name('user.blockUnblock');
+
+    Route::post('/user/toggle-moderator/{user}', [UserController::class, 'toggleModerator'])
+        ->name('user.toggleModerator');
+});
+
 });
 
 Route::middleware('auth')->group(function () {

@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'password',
-        'is_admin'
+        'is_admin',
+        'is_moderator'
     ];
 
     /**
@@ -51,7 +52,7 @@ class User extends Authenticatable
     public function groups(){
         return $this->belongsToMany(Group::class, 'group_users');
     }
-    
+
     public static function getUsersExceptUser(User $user)
     {
         $userId = $user->id;
@@ -85,6 +86,7 @@ class User extends Authenticatable
             'is_group' => false,
             'is_user' => true,
             'is_admin' => (bool) $this->is_admin,
+            'is_moderator' => (bool) $this->is_moderator,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'blocked_at' => $this->blocked_at,

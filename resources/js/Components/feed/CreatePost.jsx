@@ -94,7 +94,16 @@ const CreatePost = ({ feed = null, onPostData, postUser }) => {
           </div>
           <div className="flex-1 ">
             <div>
-              <div className="font-semibold ">{postUser.name}</div>
+              <div className="flex flex-col leading-none ">
+                {postUser.is_moderator && (
+                  <span className="text-blue-800 text-[10px] font-bold">
+                  
+                    Moderator
+                  </span>
+                )}
+                <span className="font-bold">{postUser.name}</span>
+              </div>
+
               <NewPostInput
                 rows="1"
                 value={newPost}

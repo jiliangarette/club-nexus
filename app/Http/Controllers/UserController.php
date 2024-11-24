@@ -46,6 +46,7 @@ class UserController extends Controller
       return response()->json(['message' => $message]);
     }
 
+
     public function blockUnblock(User $user)
     {
       if($user->blocked_at){
@@ -62,4 +63,14 @@ class UserController extends Controller
 
       return response()->json(['message' => $message]);
     }
+
+    public function toggleModerator(User $user)
+    {
+        $user->update(['is_moderator' => !$user->is_moderator]);
+
+        $message = "User role was changed to " . ($user->is_moderator ? 'Moderator' : 'Regular User') . ".";
+
+        return response()->json(['message' => $message]);
+    }
+
 }

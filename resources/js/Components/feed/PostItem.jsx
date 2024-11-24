@@ -23,6 +23,7 @@ export default function PostItem({
   createdAt,
   initialLikes = 0,
   isAdmin,
+  isModerator,
   avatar,
   carousel,
   postUserId,
@@ -75,7 +76,7 @@ export default function PostItem({
             <div className="flex gap-1 flex-col leading-none">
               <span className="font-semibold text-nowrap flex">
                 {username}
-                {isAdmin && (
+                {isAdmin > 0 && (
                   <ShieldCheck
                     fill="#008bff"
                     size={16}
@@ -84,6 +85,9 @@ export default function PostItem({
                 )}
               </span>
               <div className="text-nowrap text-[10px] text-slate-500">
+                {isModerator > 0 && (
+                  <span className="text-blue-800"> Moderator</span>
+                )}{" "}
                 {formatMessageDateShort(createdAt)}
               </div>
             </div>
