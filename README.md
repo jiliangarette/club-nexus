@@ -1,105 +1,73 @@
-# Running Club Nexus Locally: Step-by-Step Guide
+## Landing Page
 
-## 📋 Prerequisites
+This landing page is what users see first.
 
-1. **Visual Studio Code**
+| Mobile View                                                                                                                                      | Desktop View                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/Landing-page-m.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/Landing-page-d-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-   - **Download:** [Visual Studio Code](https://code.visualstudio.com/)
+## Signin Page
 
-2. **Node.js**
+This is the signin page.
 
-   - **Download:** [Node.js](https://nodejs.org/)
+|                                                                                                                                                 |                                                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/signin-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/Signin-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-3. **XAMPP**
+## Home Page
 
-   - **Download:** [XAMPP](https://www.apachefriends.org/index.html)
+The home page displayed when a user is Signed in.
 
-4. **Composer**
+|                                                                                                                                                   |                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/HomePage-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/Homepage-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-   - **Download:** [Composer](https://getcomposer.org/download/)
+## Join Page
 
-5. **Git**
-   - **Download:** [Git](https://git-scm.com/downloads)
+This section is where users join a club using a 5-7 alphanumeric code.
 
----
+|                                                                                                                                                   |                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/JoinClub-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/JoinClub-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-## Test
+## Permission Page
 
-- Ensure that you have all the required software installed as listed above.
-  ```bash
-  node -v
-  php -v
-  composer -v
-  ```
+This page provides guidelines and permissions for users who want to lead a club.
 
----
+|                                                                                                                                                  |                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/NSCLead-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/NSCLead-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-## 🔧 Setup Instructions
+## Create Page
 
-### 1. Clone Repository
+This section is where a club leader creates a club with their team.
 
-```bash
-git clone https://github.com/jiliangarette/club-nexus.git
-```
+|                                                                                                                                                     |                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/CreateClub-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/CreateClub-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-### 2. Navigate to the Project Directory
+## Discussion Page
 
-```bash
-cd club-nexus
-```
+This page displays discussion contents, such as resources, questions, and tips.
 
-### 3. Set Up Environment Variables
+|                                                                                                                                                   |                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/MainPage-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/MainPage-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-```bash
-cp .env.example .env
-```
+## Announcement Page
 
-### 4. Generate Application Key
+This page is responsible for important events, announcements, and important resources.
 
-```bash
-php artisan key:generate
-```
+|                                                                                                                                                           |                                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/AnnouncementPage-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/AnnouncementPage-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-### 5. Install Node.js Dependencies
+## People Page
 
-```bash
-npm install
-```
+This page displays the members, and officers of the club.
 
-### 6. Install PHP Dependencies
+|                                                                                                                                                     |                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="screenshots/PeoplePage-mobile.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="screenshots/PeoplePage-web.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
-```bash
-composer install
-```
-
----
-
-## 🚀 Running the Project Locally
-
-### 1. Backend
-
-```bash
-php artisan serve
-```
-
-### 2. Websocket
-
-```bash
-php artisan reverb:start
-```
-
-### 3. Frontend
-
-```bash
-npm run dev
-```
-
----
-
-Open your web browser and navigate to:
-
-```
-http://127.0.0.1:8000/
-```
-
----
+##END
