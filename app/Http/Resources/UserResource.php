@@ -24,6 +24,7 @@ class UserResource extends JsonResource
         'created_at' => $this->created_at,
         'updated_at' => $this->updated_at,
         'is_admin' => (bool) $this->is_admin,
+        'is_moderator'  => (bool) $this->is_moderator,
         'last_message' => $this->last_message,
         'last_message_date' => $this->last_message_date,
        ];

@@ -9,6 +9,7 @@ import {
   LockOpen,
   ShieldCheck,
   User,
+  UserCog,
 } from "lucide-react";
 
 export default function UserOptionsDropdown({ conversation }) {
@@ -29,6 +30,23 @@ export default function UserOptionsDropdown({ conversation }) {
         console.error(err);
       });
   };
+
+  const toggleModeratorRole = () => {
+    if (!conversation.is_user) {
+      return;
+    }
+
+    axios
+      .post(route("user.toggleModerator", conversation.id))
+      .then((res) => {
+        emit("toast.show", res.data.message);
+      })
+      .catch((err) => {
+        alert("error toast");
+        console.error(err);
+      });
+  };
+
   const onBlockUser = () => {
     if (!conversation.is_user) {
       return;
@@ -108,6 +126,33 @@ export default function UserOptionsDropdown({ conversation }) {
                       <>
                         <ShieldCheck className="w-4 h-4 mr-2" />
                         Make Admin
+                      </>
+                    )}
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+            <div className="px-1 py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={toggleModeratorRole}
+                    className={`${
+                      active
+                        ? "bg-slate-100 text-slate-800"
+                        : "text-slate-800 bg-slate-100"
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  >
+                    {conversation.is_moderator && (
+                      <>
+                        <UserCog className="w-4 h-4 mr-2" />
+                        Revoke Moderator
+                      </>
+                    )}
+                    {!conversation.is_moderator && (
+                      <>
+                        <UserCog className="w-4 h-4 mr-2" />
+                        Make Moderator
                       </>
                     )}
                   </button>

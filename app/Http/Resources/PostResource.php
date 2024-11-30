@@ -38,6 +38,7 @@ public function toArray($request)
         'user' => [
             'id' => $this->user->id,
             'is_admin' => $this->user->is_admin,
+            'is_moderator' => $this->user->is_moderator,
             'name' => $this->user->name,
             'avatar_url' => $this->user->avatar ? '/storage/' . $this->user->avatar : null,
         ],

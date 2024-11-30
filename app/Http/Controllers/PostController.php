@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $posts = Post::with([
             'user' => function ($query) {
-                $query->select('id', 'name', 'avatar', 'is_admin');
+                $query->select('id', 'name', 'avatar', 'is_admin', 'is_moderator');
             },
             'attachments' => function ($query) {
                 $query->select('id', 'post_id', 'name', 'path', 'mime', 'size', 'created_at', 'updated_at');
@@ -51,6 +51,7 @@ class PostController extends Controller
                 'user' => [
                     'id' => $post->user->id,
                     'is_admin' => $post->user->is_admin,
+                    'is_moderator' => $post->user->is_moderator,
                     'name' => $post->user->name,
                     'avatar_url' => $post->user->avatar ? '/storage/' . $post->user->avatar : null,
                 ],
@@ -113,7 +114,7 @@ class PostController extends Controller
             $post->attachments()->saveMany($attachments);
         }
 
-        $post->load(['user:id,name,avatar,is_admin', 'attachments']);
+        $post->load(['user:id,name,avatar,is_admin, is_moderator', 'attachments']);
 
         return new PostResource($post);
     }
