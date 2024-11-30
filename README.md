@@ -4,7 +4,7 @@ This landing page is what users see first.
 
 | Mobile View                                                                                                                                             | Desktop View                                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img src="public/screenshots/landing_page_m.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="public/screenshots/landing_page_d.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
+| <img src="public/screenshots/landing_page_m.png" alt="Mobile View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> | <img src="public/screenshots/landing-page_d.png" alt="Desktop View" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid gray;"> |
 
 ## Signin Page
 
